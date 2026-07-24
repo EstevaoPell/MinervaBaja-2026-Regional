@@ -1,0 +1,62 @@
+***BUSMASTER Ver 3.2.2***
+***PROTOCOL CAN***
+***NOTE: PLEASE DO NOT EDIT THIS DOCUMENT***
+***[START LOGGING SESSION]***
+***START DATE AND TIME 14:5:2021 12:56:11:422***
+***HEX***
+***SYSTEM MODE***
+***START CHANNEL BAUD RATE***
+***CHANNEL 1 - Simulation - 500000 bps***
+***CHANNEL 2 - Simulation - 500000 bps***
+***CHANNEL 3 - Simulation - 500000 bps***
+***CHANNEL 4 - Simulation - 500000 bps***
+***CHANNEL 5 - Simulation - 500000 bps***
+***CHANNEL 6 - Simulation - 500000 bps***
+***CHANNEL 7 - Simulation - 500000 bps***
+***CHANNEL 8 - Simulation - 500000 bps***
+***CHANNEL 9 - Simulation - 500000 bps***
+***CHANNEL 10 - Simulation - 500000 bps***
+***CHANNEL 11 - Simulation - 500000 bps***
+***CHANNEL 12 - Simulation - 500000 bps***
+***CHANNEL 13 - Simulation - 500000 bps***
+***CHANNEL 14 - Simulation - 500000 bps***
+***CHANNEL 15 - Simulation - 500000 bps***
+***CHANNEL 16 - Simulation - 500000 bps***
+***END CHANNEL BAUD RATE***
+***START DATABASE FILES***
+***END DATABASE FILES***
+***<Time><Tx/Rx><Channel><CAN ID><Type><DLC><DataBytes>***
+***END DATE AND TIME 14:5:2021 12:58:6:413***
+***[STOP LOGGING SESSION]***
+
+***BUSMASTER Ver 3.2.2***
+***PROTOCOL CAN***
+***NOTE: PLEASE DO NOT EDIT THIS DOCUMENT***
+***[START LOGGING SESSION]***
+***START DATE AND TIME 14:5:2021 12:58:7:987***
+***HEX***
+***SYSTEM MODE***
+***START CHANNEL BAUD RATE***
+***CHANNEL 1 - Simulation - 500000 bps***
+***CHANNEL 2 - Simulation - 500000 bps***
+***CHANNEL 3 - Simulation - 500000 bps***
+***CHANNEL 4 - Simulation - 500000 bps***
+***CHANNEL 5 - Simulation - 500000 bps***
+***CHANNEL 6 - Simulation - 500000 bps***
+***CHANNEL 7 - Simulation - 500000 bps***
+***CHANNEL 8 - Simulation - 500000 bps***
+***CHANNEL 9 - Simulation - 500000 bps***
+***CHANNEL 10 - Simulation - 500000 bps***
+***CHANNEL 11 - Simulation - 500000 bps***
+***CHANNEL 12 - Simulation - 500000 bps***
+***CHANNEL 13 - Simulation - 500000 bps***
+***CHANNEL 14 - Simulation - 500000 bps***
+***CHANNEL 15 - Simulation - 500000 bps***
+***CHANNEL 16 - Simulation - 500000 bps***
+***END CHANNEL BAUD RATE***
+***START DATABASE FILES***
+***END DATABASE FILES***
+***<Time><Tx/Rx><Channel><CAN ID><Type><DLC><DataBytes>***
+***END DATE AND TIME 14:5:2021 12:58:37:81***
+***[STOP LOGGING SESSION]***
+

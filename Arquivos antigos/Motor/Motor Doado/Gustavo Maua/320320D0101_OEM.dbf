@@ -1,0 +1,358 @@
+//******************************BUSMASTER Messages and signals Database ******************************//
+
+[DATABASE_VERSION] 1.3
+
+[PROTOCOL] CAN
+
+[BUSMASTER_VERSION] [3.2.2]
+[NUMBER_OF_MESSAGES] 20
+
+[START_MSG] Pt_Obd_2,17,2,1,1,S,PT
+[START_SIGNALS] Pt_tiSnceEngStrtd,16,1,0,I,32767,0,1,0,1,s,,ED
+[END_MSG]
+
+[START_MSG] Edrv_Status_1,8,8,1,1,S,ED
+[START_SIGNALS] Edrv_sMask,64,1,0,U,1,0,1,0,1,,,PT
+[END_MSG]
+
+[START_MSG] Obd_Edrv_Resp,2008,8,0,1,S,ED
+[END_MSG]
+
+[START_MSG] Diag_Edrv_GlobalReq,1824,8,0,1,S,Tester
+[END_MSG]
+
+[START_MSG] Obd_Edrv_GlobalReq,2015,8,0,1,S,Tester
+[END_MSG]
+
+[START_MSG] Obd_Edrv_Req,2000,8,0,1,S,Tester
+[END_MSG]
+
+[START_MSG] Pt_Veh_1,16,8,8,1,S,PT
+[START_SIGNALS] Pt_tiEdrvShOff,12,7,2,U,4095,0,1,0,1,min,,ED
+[START_SIGNALS] Pt_tAmbEdrv,8,6,2,U,255,0,1,-40,1,°C,,ED
+[START_SIGNALS] Pt_stIgnSwt,3,2,4,U,7,0,1,0,1,,,ED
+[VALUE_DESCRIPTION] "IGN_START",5
+[VALUE_DESCRIPTION] "IGN_ON",4
+[VALUE_DESCRIPTION] "Free",3
+[VALUE_DESCRIPTION] "IGN_ACC",2
+[VALUE_DESCRIPTION] "IGN_OFF",1
+[VALUE_DESCRIPTION] "IGN_LOCK",0
+[START_SIGNALS] Pt_nrAlvCntrIgn,4,2,0,U,15,0,1,0,1,,,ED
+[START_SIGNALS] Pt_nrChksIgn,8,1,0,U,255,0,1,0,1,,,ED
+[START_SIGNALS] Pt_vVeh,12,4,6,U,4090,0,1,0,0.1,km/h,,ED
+[START_SIGNALS] Pt_nEng,14,3,0,U,16383,0,1,0,1,rpm,,ED
+[START_SIGNALS] Pt_flgCrash,1,8,6,B,1,0,1,0,1,,,ED
+[VALUE_DESCRIPTION] "Crash",1
+[VALUE_DESCRIPTION] "No_Crash",0
+[END_MSG]
+
+[START_MSG] Pt_Obd_1,15,8,5,1,S,PT
+[START_SIGNALS] Pt_ratApp,8,4,0,U,200,0,1,0,0.5,%,,ED
+[START_SIGNALS] Pt_tiEngShOff,12,7,0,U,4095,0,1,0,1,min,,ED
+[START_SIGNALS] Pt_tCooltEng,8,6,0,U,255,0,1,-40,1,°C,,ED
+[START_SIGNALS] Pt_ratEngLoad,8,5,0,U,200,0,1,0,0.5,%,,ED
+[START_SIGNALS] Pt_dstOdo,24,1,0,U,16777200,0,1,0,0.1,km,,ED
+[END_MSG]
+
+[START_MSG] Obd_state_1,14,2,9,1,S,OBD_Master
+[START_SIGNALS] Obd_stWrmupCdn,1,2,5,B,1,0,1,0,1,,,ED
+[VALUE_DESCRIPTION] " Conditions fulfilled",1
+[VALUE_DESCRIPTION] "Conditions not fulfilled",0
+[START_SIGNALS] Obd_stIgnCycEngRunngCdn,2,2,3,U,2,0,1,0,1,,,ED
+[VALUE_DESCRIPTION] "Fault",2
+[VALUE_DESCRIPTION] "Conditions fulfilled",1
+[VALUE_DESCRIPTION] "Conditions not fulfilled",0
+[START_SIGNALS] Obd_stIgnCycCdn,2,2,1,U,2,0,1,0,1,,,ED
+[VALUE_DESCRIPTION] "Fault",2
+[VALUE_DESCRIPTION] "Conditions fulfilled",1
+[VALUE_DESCRIPTION] "Conditions not fulfilled",0
+[START_SIGNALS] Obd_stGnrlDenomPdtcDltCdn,1,2,0,B,1,0,1,0,1,,,ED
+[VALUE_DESCRIPTION] " Conditions fulfilled",1
+[VALUE_DESCRIPTION] "Conditions not fulfilled",0
+[START_SIGNALS] Obd_stGnrlDenomCdn,2,1,6,U,2,0,1,0,1,,,ED
+[VALUE_DESCRIPTION] "Fault",2
+[VALUE_DESCRIPTION] "Conditions fulfilled",1
+[VALUE_DESCRIPTION] "Conditions not fulfilled",0
+[START_SIGNALS] Obd_stDcycCdn,2,1,4,U,2,0,1,0,1,,,ED
+[VALUE_DESCRIPTION] "Fault",2
+[VALUE_DESCRIPTION] "Conditions fulfilled",1
+[VALUE_DESCRIPTION] "Conditions not fulfilled",0
+[START_SIGNALS] Obd_stColdStrtDenomCdn,2,1,2,U,2,0,1,0,1,,,ED
+[VALUE_DESCRIPTION] "Fault",2
+[VALUE_DESCRIPTION] "Conditions fulfilled",1
+[VALUE_DESCRIPTION] "Conditions not fulfilled",0
+[START_SIGNALS] Obd_flgSrv04Enad,1,1,1,B,1,0,1,0,1,,,ED
+[START_SIGNALS] Obd_flgCsersActv,1,1,0,B,1,0,1,0,1,,,ED
+[END_MSG]
+
+[START_MSG] Eem_Edrv_Lim_1,13,8,6,1,S,EEM
+[START_SIGNALS] Eem_rMvbEdrv,10,3,4,U,1000,0,1,0,0.001,Ohm,,ED
+[START_SIGNALS] Eem_iMinEdrv,10,7,2,U,1023,0,1,-1000,1,A,,ED
+[START_SIGNALS] Eem_iMaxEdrv,10,6,0,U,1023,0,1,0,1,A,,ED
+[START_SIGNALS] Eem_iReqEdrv,10,4,6,U,1023,0,1,-500,1,A,,ED
+[START_SIGNALS] Eem_uMinEdrv,10,2,2,U,1008,0,1,0,0.0625,V,,ED
+[START_SIGNALS] Eem_uMaxEdrv,10,1,0,U,1008,0,1,0,0.0625,V,,ED
+[END_MSG]
+
+[START_MSG] Eem_Edrv_Des_1,11,3,4,1,S,EEM
+[START_SIGNALS] Eem_stRlyMvbEdrv,2,3,6,U,3,0,1,0,1,,,ED
+[VALUE_DESCRIPTION] "Precharge",3
+[VALUE_DESCRIPTION] "Open",2
+[VALUE_DESCRIPTION] "Opening request",1
+[VALUE_DESCRIPTION] "Closed",0
+[START_SIGNALS] Eem_nrChksAct,8,1,0,U,255,0,1,0,1,,,ED
+[START_SIGNALS] Eem_nrAlvCntrAct,4,2,0,U,15,0,1,0,1,,,ED
+[START_SIGNALS] Eem_uDesEdrv,10,2,4,U,1008,0,1,0,0.0625,V,,ED
+[END_MSG]
+
+[START_MSG] XCP_EA_DTO_01,469538305,8,0,1,X,ED
+[END_MSG]
+
+[START_MSG] XCP_EA_CRO_01,469538304,8,0,1,X,Tester
+[END_MSG]
+
+[START_MSG] Diag_Edrv_Resp,1888,8,0,1,S,ED
+[END_MSG]
+
+[START_MSG] Diag_Edrv_Req,1856,8,0,1,S,Tester
+[END_MSG]
+
+[START_MSG] Edrv_Pred_1,6,8,7,1,S,ED
+[START_SIGNALS] Edrv_nrAlvCntrLim,4,2,0,U,15,0,1,0,1,,,PT
+[START_SIGNALS] Edrv_nrChksLim,8,1,0,U,255,0,1,0,1,,,PT
+[START_SIGNALS] Edrv_stActDern,4,8,4,U,15,0,1,0,1,,,PT
+[VALUE_DESCRIPTION] "FREE",15
+[VALUE_DESCRIPTION] "FREE",14
+[VALUE_DESCRIPTION] "FREE",13
+[VALUE_DESCRIPTION] "FREE",12
+[VALUE_DESCRIPTION] "FREE",11
+[VALUE_DESCRIPTION] "FREE",10
+[VALUE_DESCRIPTION] "FREE",9
+[VALUE_DESCRIPTION] "FREE",8
+[VALUE_DESCRIPTION] "derating: phase current limit",7
+[VALUE_DESCRIPTION] "derating: motor temp limitation",6
+[VALUE_DESCRIPTION] "derating: inverter limitation",5
+[VALUE_DESCRIPTION] "derating: speed limitation",4
+[VALUE_DESCRIPTION] "derating: torque limitation",3
+[VALUE_DESCRIPTION] "derating: DC current limitation",2
+[VALUE_DESCRIPTION] "derating: DC voltage limitation",1
+[VALUE_DESCRIPTION] " no derating",0
+[START_SIGNALS] Edrv_tqMinAvl,12,7,0,U,4090,0,1,-200,0.1,Nm,,PT
+[START_SIGNALS] Edrv_tqMinEemPrdn,12,5,4,U,4090,0,1,-200,0.1,Nm,,PT
+[START_SIGNALS] Edrv_tqMaxAvl,12,4,0,U,4090,0,1,-200,0.1,Nm,,PT
+[START_SIGNALS] Edrv_tqMaxEemPrdn,12,2,4,U,4090,0,1,-200,0.1,Nm,,PT
+[END_MSG]
+
+[START_MSG] Eem_Edrv_Pred_1,5,5,4,1,S,EEM
+[START_SIGNALS] Eem_iMaxPrdnEdrv,10,4,2,U,1023,0,1,-200,1,A,,ED
+[START_SIGNALS] Eem_iMinPrdnEdrv,10,3,0,U,1023,0,1,-800,1,A,,ED
+[START_SIGNALS] Eem_uMinPrdnEdrv,8,2,0,U,252,0,1,0,0.25,V,,ED
+[START_SIGNALS] Eem_uMaxPrdnEdrv,8,1,0,U,252,0,1,10,0.25,V,,ED
+[END_MSG]
+
+[START_MSG] Edrv_Req_1,4,8,10,1,S,ED
+[START_SIGNALS] Edrv_stStrtPsbl,2,8,2,U,3,0,1,0,1,,,PT
+[VALUE_DESCRIPTION] "Not Possible",2
+[VALUE_DESCRIPTION] "Critical",1
+[VALUE_DESCRIPTION] "Possible",0
+[START_SIGNALS] Edrv_ratTCritIvtr,6,7,4,U,63,0,1,0,2,%,,PT
+[START_SIGNALS] Edrv_flgMilReqd,1,6,5,B,1,0,1,0,1,,,PT
+[START_SIGNALS] Edrv_stFltId,9,5,4,U,511,0,1,0,1,,,PT
+[START_SIGNALS] Edrv_ratTCritMac,6,6,6,U,63,0,1,0,2,%,,PT
+[START_SIGNALS] Edrv_nReq,12,4,0,U,4095,0,1,0,6,rpm,,PT
+[START_SIGNALS] Edrv_tqReq,12,2,4,U,4090,0,1,-200,0.1,Nm,,PT
+[START_SIGNALS] Edrv_nrAlvCntrReq,4,2,0,U,15,0,1,0,1,,,PT
+[START_SIGNALS] Edrv_nrChksReq,8,1,0,U,255,0,1,0,1,,,PT
+[START_SIGNALS] Edrv_stTq,2,8,4,U,3,0,1,0,1,,,PT
+[VALUE_DESCRIPTION] "Not Possible",2
+[VALUE_DESCRIPTION] "Critical",1
+[VALUE_DESCRIPTION] "Possible",0
+[END_MSG]
+
+[START_MSG] Edrv_Act_1,2,8,8,1,S,ED
+[START_SIGNALS] Edrv_stRunAct,2,2,4,U,3,0,1,0,1,,,PT
+[VALUE_DESCRIPTION] "TORQUE_SNA",3
+[VALUE_DESCRIPTION] "TORQUE_SMALLER",2
+[VALUE_DESCRIPTION] "TORQUE_BIGGER",1
+[VALUE_DESCRIPTION] "TORQUE_PLAUSIBLE",0
+[START_SIGNALS] Edrv_nrChksAct,8,1,0,U,255,0,1,0,1,,,PT
+[START_SIGNALS] Edrv_nrAlvCntrAct,4,2,0,U,15,0,1,0,1,,,PT
+[START_SIGNALS] Edrv_nAct,13,4,6,U,8191,0,1,-24000,6,rpm,,PT
+[START_SIGNALS] Edrv_iAct,10,7,6,U,1023,0,1,-500,1,A,,EEM
+[START_SIGNALS] Edrv_uAct,10,6,4,U,1008,0,1,0,0.0625,V,,EEM
+[START_SIGNALS] Edrv_tqAct,12,3,2,U,4090,0,1,-200,0.1,Nm,,PT
+[START_SIGNALS] Edrv_stOperModAct,4,2,6,U,15,0,1,0,1,,,PT
+[VALUE_DESCRIPTION] "Error",15
+[VALUE_DESCRIPTION] "Standby",14
+[VALUE_DESCRIPTION] "Free",13
+[VALUE_DESCRIPTION] "Reserved",12
+[VALUE_DESCRIPTION] "Start",11
+[VALUE_DESCRIPTION] "Reserved",10
+[VALUE_DESCRIPTION] "Reserved",9
+[VALUE_DESCRIPTION] "Free",8
+[VALUE_DESCRIPTION] "Free",7
+[VALUE_DESCRIPTION] "Speed",6
+[VALUE_DESCRIPTION] "Reserved",5
+[VALUE_DESCRIPTION] "Voltage",4
+[VALUE_DESCRIPTION] "Reserved",3
+[VALUE_DESCRIPTION] "Free",2
+[VALUE_DESCRIPTION] "Torque",1
+[VALUE_DESCRIPTION] "Idle",0
+[END_MSG]
+
+[START_MSG] Pt_Edrv_Des_1,1,7,6,1,S,PT
+[START_SIGNALS] Pt_tqMinEdrv,12,4,4,U,4090,0,1,-200,0.1,Nm,,ED
+[START_SIGNALS] Pt_nrChksAct,8,1,0,U,255,0,1,0,1,,,ED
+[START_SIGNALS] Pt_nrAlvCntrAct,4,2,0,U,15,0,1,0,1,,,ED
+[START_SIGNALS] Pt_nDesEdrv,13,6,0,U,8191,0,1,-24000,6,rpm,,ED
+[START_SIGNALS] Pt_tqDesEdrv,12,3,0,U,4090,0,1,-200,0.1,Nm,,ED
+[START_SIGNALS] Pt_stOperModDesEdrv,4,2,4,U,15,0,1,0,1,,,ED
+[VALUE_DESCRIPTION] "Reserved",15
+[VALUE_DESCRIPTION] "Reserved",14
+[VALUE_DESCRIPTION] "Free",13
+[VALUE_DESCRIPTION] "Reserved",12
+[VALUE_DESCRIPTION] "Start",11
+[VALUE_DESCRIPTION] "Reserved",10
+[VALUE_DESCRIPTION] "Reserved",9
+[VALUE_DESCRIPTION] "Free",8
+[VALUE_DESCRIPTION] "Free",7
+[VALUE_DESCRIPTION] "Speed",6
+[VALUE_DESCRIPTION] "Reserved",5
+[VALUE_DESCRIPTION] "Voltage",4
+[VALUE_DESCRIPTION] "Reserved",3
+[VALUE_DESCRIPTION] "Free",2
+[VALUE_DESCRIPTION] "Torque",1
+[VALUE_DESCRIPTION] "Idle",0
+[END_MSG]
+
+[START_VALUE_TABLE]
+[START_TABLE] OBD_2_conditions_fulfilled
+[VALUE_DESCRIPTION] "Conditions fulfilled",1
+[VALUE_DESCRIPTION] "Conditions not fulfilled",0
+[END_TABLE]
+[START_TABLE] OBD_3_conditions_fulfilled
+[VALUE_DESCRIPTION] "Fault",2
+[VALUE_DESCRIPTION] "Conditions fulfilled",1
+[VALUE_DESCRIPTION] "Conditions not fulfilled",0
+[END_TABLE]
+[END_VALUE_TABLE]
+
+[NODE] OBD_Master,PT,EEM,Tester,ED
+
+[START_DESC]
+[START_DESC_NET]
+[END_DESC_NET]
+
+[START_DESC_NODE]
+[END_DESC_NODE]
+
+[START_DESC_MSG]
+[END_DESC_MSG]
+
+[START_DESC_SIG]
+[END_DESC_SIG]
+[END_DESC]
+
+[START_PARAM]
+[START_PARAM_NET]
+"BusType",STRING,""
+[END_PARAM_NET]
+
+[START_PARAM_NODE]
+"NodeLayerModules",STRING,""
+"ECU",STRING,""
+"CANoeJitterMax",INT,0,0,0
+"CANoeJitterMin",INT,0,0,0
+"CANoeDrift",INT,0,0,0
+"CANoeStartDelay",INT,0,0,0
+[END_PARAM_NODE]
+
+[START_PARAM_MSG]
+"GenMsgSendType",ENUM,"NoMsgSendType","Cyclic","not_used","not_used","not_used","not_used","not_used","not_used","IfActive","NoMsgSendType"
+"GenMsgCyclicTime",INT,0,0,65535
+[END_PARAM_MSG]
+
+[START_PARAM_SIG]
+[END_PARAM_SIG]
+
+[START_PARAM_NODE_RX_SIG]
+[END_PARAM_NODE_RX_SIG]
+
+[START_PARAM_NODE_TX_MSG]
+[END_PARAM_NODE_TX_MSG]
+[END_PARAM]
+
+[START_PARAM_VAL]
+[START_PARAM_NET_VAL]
+[END_PARAM_NET_VAL]
+
+[START_PARAM_NODE_VAL]
+[END_PARAM_NODE_VAL]
+
+[START_PARAM_MSG_VAL]
+17,S,"GenMsgSendType","0"
+8,S,"GenMsgSendType","0"
+16,S,"GenMsgSendType","0"
+15,S,"GenMsgSendType","0"
+14,S,"GenMsgSendType","0"
+13,S,"GenMsgSendType","0"
+11,S,"GenMsgSendType","0"
+6,S,"GenMsgSendType","0"
+5,S,"GenMsgSendType","0"
+4,S,"GenMsgSendType","0"
+2,S,"GenMsgSendType","0"
+1,S,"GenMsgSendType","0"
+17,S,"GenMsgCyclicTime",200
+8,S,"GenMsgCyclicTime",100
+16,S,"GenMsgCyclicTime",100
+15,S,"GenMsgCyclicTime",200
+14,S,"GenMsgCyclicTime",200
+13,S,"GenMsgCyclicTime",10
+11,S,"GenMsgCyclicTime",10
+6,S,"GenMsgCyclicTime",10
+5,S,"GenMsgCyclicTime",10
+4,S,"GenMsgCyclicTime",10
+2,S,"GenMsgCyclicTime",10
+1,S,"GenMsgCyclicTime",10
+[END_PARAM_MSG_VAL]
+
+[START_PARAM_SIG_VAL]
+[END_PARAM_SIG_VAL]
+
+[END_PARAM_VAL]
+
+
+[START_NOT_SUPPORTED]
+[END_NOT_SUPPORTED]
+
+[START_NOT_PROCESSED]
+	PZ_
+	ON_QRS_
+	ON_
+	INY_
+	PNG_QRS_
+	PNG_
+	SVYGRE
+	ON_QRS_QRS_
+	RI_QNGN_
+	RAIINE_QNGN_
+	FTGLCR_
+	FTGLCR_INY_
+	ON_QRS_FTGLCR_
+	ON_FTGLCR_
+	FVT_GLCR_ERS_
+	INY_GNOYR_
+	FVT_TEBHC_
+	FVT_INYGLCR_
+	FVTGLCR_INYGLCR_
+	OB_GK_OH_
+	ON_QRS_ERY_
+	ON_ERY_
+	ON_QRS_QRS_ERY_
+	OH_FT_ERY_
+	OH_RI_ERY_
+	OH_OB_ERY_
+	FT_ZHY_INY_
+OF_:
+
+[END_NOT_PROCESSED]
