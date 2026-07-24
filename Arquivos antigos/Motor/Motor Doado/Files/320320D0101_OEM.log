@@ -1,0 +1,8 @@
+Conversion Warnings Log
+
+
+MSG_ID: 17 	MSG_TYPE: S 	MSG_NAME: Pt_Obd_2
+	SIG_NAME: Pt_tiSnceEngStrtd, STATUS: Invalid Max or Min value., ACTION: Value Set to default
+
+MSG_ID: 6 	MSG_TYPE: S 	MSG_NAME: Edrv_Pred_1
+	SIG_NAME: Edrv_stActDern, STATUS: Invalid Max or Min value., ACTION: Value Set to default

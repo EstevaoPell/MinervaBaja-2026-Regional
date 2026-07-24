@@ -1,0 +1,210 @@
+VERSION ""
+
+
+NS_ : 
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+	BO_TX_BU_
+	BA_DEF_REL_
+	BA_REL_
+	BA_DEF_DEF_REL_
+	BU_SG_REL_
+	BU_EV_REL_
+	BU_BO_REL_
+	SG_MUL_VAL_
+
+BS_:
+
+BU_: OBD_Master PT EEM Tester ED
+VAL_TABLE_ OBD_2_conditions_fulfilled 1 "Conditions fulfilled" 0 "Conditions not fulfilled" ;
+VAL_TABLE_ OBD_3_conditions_fulfilled 2 "Fault" 1 "Conditions fulfilled" 0 "Conditions not fulfilled" ;
+
+
+BO_ 17 Pt_Obd_2: 2 PT
+ SG_ Pt_tiSnceEngStrtd : 0|16@1- (1,0) [0|65535] "s"  ED
+
+BO_ 8 Edrv_Status_1: 8 ED
+ SG_ Edrv_sMask : 0|64@1+ (1,0) [0|1.84467440737096E+019] ""  PT
+
+BO_ 2008 Obd_Edrv_Resp: 8 ED
+
+BO_ 1824 Diag_Edrv_GlobalReq: 8 Tester
+
+BO_ 2015 Obd_Edrv_GlobalReq: 8 Tester
+
+BO_ 2000 Obd_Edrv_Req: 8 Tester
+
+BO_ 16 Pt_Veh_1: 8 PT
+ SG_ Pt_tiEdrvShOff : 50|12@1+ (1,0) [0|4095] "min"  ED
+ SG_ Pt_tAmbEdrv : 42|8@1+ (1,-40) [-40|215] "°C"  ED
+ SG_ Pt_stIgnSwt : 12|3@1+ (1,0) [0|7] ""  ED
+ SG_ Pt_nrAlvCntrIgn : 8|4@1+ (1,0) [0|15] ""  ED
+ SG_ Pt_nrChksIgn : 0|8@1+ (1,0) [0|255] ""  ED
+ SG_ Pt_vVeh : 30|12@1+ (0.1,0) [0|409.5] "km/h"  ED
+ SG_ Pt_nEng : 16|14@1+ (1,0) [0|16383] "rpm"  ED
+ SG_ Pt_flgCrash : 62|1@1+ (1,0) [0|1] ""  ED
+
+BO_ 15 Pt_Obd_1: 8 PT
+ SG_ Pt_ratApp : 24|8@1+ (0.5,0) [0|100] "%"  ED
+ SG_ Pt_tiEngShOff : 48|12@1+ (1,0) [0|4095] "min"  ED
+ SG_ Pt_tCooltEng : 40|8@1+ (1,-40) [-40|215] "°C"  ED
+ SG_ Pt_ratEngLoad : 32|8@1+ (0.5,0) [0|100] "%"  ED
+ SG_ Pt_dstOdo : 0|24@1+ (0.1,0) [0|1677720] "km"  ED
+
+BO_ 14 Obd_state_1: 2 OBD_Master
+ SG_ Obd_stWrmupCdn : 13|1@1+ (1,0) [0|1] ""  ED
+ SG_ Obd_stIgnCycEngRunngCdn : 11|2@1+ (1,0) [0|2] ""  ED
+ SG_ Obd_stIgnCycCdn : 9|2@1+ (1,0) [0|2] ""  ED
+ SG_ Obd_stGnrlDenomPdtcDltCdn : 8|1@1+ (1,0) [0|1] ""  ED
+ SG_ Obd_stGnrlDenomCdn : 6|2@1+ (1,0) [0|2] ""  ED
+ SG_ Obd_stDcycCdn : 4|2@1+ (1,0) [0|2] ""  ED
+ SG_ Obd_stColdStrtDenomCdn : 2|2@1+ (1,0) [0|2] ""  ED
+ SG_ Obd_flgSrv04Enad : 1|1@1+ (1,0) [0|1] ""  ED
+ SG_ Obd_flgCsersActv : 0|1@1+ (1,0) [0|1] ""  ED
+
+BO_ 13 Eem_Edrv_Lim_1: 8 EEM
+ SG_ Eem_rMvbEdrv : 20|10@1+ (0.001,0) [0|1.023] "Ohm"  ED
+ SG_ Eem_iMinEdrv : 50|10@1+ (1,-1000) [-1000|23] "A"  ED
+ SG_ Eem_iMaxEdrv : 40|10@1+ (1,0) [0|1023] "A"  ED
+ SG_ Eem_iReqEdrv : 30|10@1+ (1,-500) [-500|523] "A"  ED
+ SG_ Eem_uMinEdrv : 10|10@1+ (0.0625,0) [0|63.9375] "V"  ED
+ SG_ Eem_uMaxEdrv : 0|10@1+ (0.0625,0) [0|63.9375] "V"  ED
+
+BO_ 11 Eem_Edrv_Des_1: 3 EEM
+ SG_ Eem_stRlyMvbEdrv : 22|2@1+ (1,0) [0|3] ""  ED
+ SG_ Eem_nrChksAct : 0|8@1+ (1,0) [0|255] ""  ED
+ SG_ Eem_nrAlvCntrAct : 8|4@1+ (1,0) [0|15] ""  ED
+ SG_ Eem_uDesEdrv : 12|10@1+ (0.0625,0) [0|63.9375] "V"  ED
+
+BO_ 2617021953 XCP_EA_DTO_01: 8 ED
+
+BO_ 2617021952 XCP_EA_CRO_01: 8 Tester
+
+BO_ 1888 Diag_Edrv_Resp: 8 ED
+
+BO_ 1856 Diag_Edrv_Req: 8 Tester
+
+BO_ 6 Edrv_Pred_1: 8 ED
+ SG_ Edrv_nrAlvCntrLim : 8|4@1+ (1,0) [0|15] ""  PT
+ SG_ Edrv_nrChksLim : 0|8@1+ (1,0) [0|255] ""  PT
+ SG_ Edrv_stActDern : 60|4@1+ (1,0) [0|0] ""  PT
+ SG_ Edrv_tqMinAvl : 48|12@1+ (0.1,-200) [-200|209.5] "Nm"  PT
+ SG_ Edrv_tqMinEemPrdn : 36|12@1+ (0.1,-200) [-200|209.5] "Nm"  PT
+ SG_ Edrv_tqMaxAvl : 24|12@1+ (0.1,-200) [-200|209.5] "Nm"  PT
+ SG_ Edrv_tqMaxEemPrdn : 12|12@1+ (0.1,-200) [-200|209.5] "Nm"  PT
+
+BO_ 5 Eem_Edrv_Pred_1: 5 EEM
+ SG_ Eem_iMaxPrdnEdrv : 26|10@1+ (1,-200) [-200|823] "A"  ED
+ SG_ Eem_iMinPrdnEdrv : 16|10@1+ (1,-800) [-800|223] "A"  ED
+ SG_ Eem_uMinPrdnEdrv : 8|8@1+ (0.25,0) [0|63.75] "V"  ED
+ SG_ Eem_uMaxPrdnEdrv : 0|8@1+ (0.25,10) [10|73.75] "V"  ED
+
+BO_ 4 Edrv_Req_1: 8 ED
+ SG_ Edrv_stStrtPsbl : 58|2@1+ (1,0) [0|3] ""  PT
+ SG_ Edrv_ratTCritIvtr : 52|6@1+ (2,0) [0|126] "%"  PT
+ SG_ Edrv_flgMilReqd : 45|1@1+ (1,0) [0|1] ""  PT
+ SG_ Edrv_stFltId : 36|9@1+ (1,0) [0|511] ""  PT
+ SG_ Edrv_ratTCritMac : 46|6@1+ (2,0) [0|126] "%"  PT
+ SG_ Edrv_nReq : 24|12@1+ (6,0) [0|24570] "rpm"  PT
+ SG_ Edrv_tqReq : 12|12@1+ (0.1,-200) [-200|209.5] "Nm"  PT
+ SG_ Edrv_nrAlvCntrReq : 8|4@1+ (1,0) [0|15] ""  PT
+ SG_ Edrv_nrChksReq : 0|8@1+ (1,0) [0|255] ""  PT
+ SG_ Edrv_stTq : 60|2@1+ (1,0) [0|3] ""  PT
+
+BO_ 2 Edrv_Act_1: 8 ED
+ SG_ Edrv_stRunAct : 12|2@1+ (1,0) [0|3] ""  PT
+ SG_ Edrv_nrChksAct : 0|8@1+ (1,0) [0|255] ""  PT
+ SG_ Edrv_nrAlvCntrAct : 8|4@1+ (1,0) [0|15] ""  PT
+ SG_ Edrv_nAct : 30|13@1+ (6,-24000) [-24000|25146] "rpm"  PT
+ SG_ Edrv_iAct : 54|10@1+ (1,-500) [-500|523] "A"  EEM
+ SG_ Edrv_uAct : 44|10@1+ (0.0625,0) [0|63.9375] "V"  EEM
+ SG_ Edrv_tqAct : 18|12@1+ (0.1,-200) [-200|209.5] "Nm"  PT
+ SG_ Edrv_stOperModAct : 14|4@1+ (1,0) [0|15] ""  PT
+
+BO_ 1 Pt_Edrv_Des_1: 7 PT
+ SG_ Pt_tqMinEdrv : 28|12@1+ (0.1,-200) [-200|209.5] "Nm"  ED
+ SG_ Pt_nrChksAct : 0|8@1+ (1,0) [0|255] ""  ED
+ SG_ Pt_nrAlvCntrAct : 8|4@1+ (1,0) [0|15] ""  ED
+ SG_ Pt_nDesEdrv : 40|13@1+ (6,-24000) [-24000|25146] "rpm"  ED
+ SG_ Pt_tqDesEdrv : 16|12@1+ (0.1,-200) [-200|209.5] "Nm"  ED
+ SG_ Pt_stOperModDesEdrv : 12|4@1+ (1,0) [0|15] ""  ED
+
+
+
+BA_DEF_ BO_  "GenMsgSendType" ENUM  "Cyclic","not_used","not_used","not_used","not_used","not_used","not_used","IfActive","NoMsgSendType";
+BA_DEF_ BO_  "GenMsgCyclicTime" INT 0 65535;
+BA_DEF_  "BusType" STRING ;
+BA_DEF_ BU_  "NodeLayerModules" STRING ;
+BA_DEF_ BU_  "ECU" STRING ;
+BA_DEF_ BU_  "CANoeJitterMax" INT 0 0;
+BA_DEF_ BU_  "CANoeJitterMin" INT 0 0;
+BA_DEF_ BU_  "CANoeDrift" INT 0 0;
+BA_DEF_ BU_  "CANoeStartDelay" INT 0 0;
+BA_DEF_DEF_  "GenMsgSendType" "NoMsgSendType";
+BA_DEF_DEF_  "GenMsgCyclicTime" 0;
+BA_DEF_DEF_  "BusType" "";
+BA_DEF_DEF_  "NodeLayerModules" "";
+BA_DEF_DEF_  "ECU" "";
+BA_DEF_DEF_  "CANoeJitterMax" 0;
+BA_DEF_DEF_  "CANoeJitterMin" 0;
+BA_DEF_DEF_  "CANoeDrift" 0;
+BA_DEF_DEF_  "CANoeStartDelay" 0;
+BA_ "GenMsgCyclicTime" BO_ 17 200;
+BA_ "GenMsgSendType" BO_ 17 0;
+BA_ "GenMsgSendType" BO_ 8 0;
+BA_ "GenMsgCyclicTime" BO_ 8 100;
+BA_ "GenMsgSendType" BO_ 16 0;
+BA_ "GenMsgCyclicTime" BO_ 16 100;
+BA_ "GenMsgSendType" BO_ 15 0;
+BA_ "GenMsgCyclicTime" BO_ 15 200;
+BA_ "GenMsgSendType" BO_ 14 0;
+BA_ "GenMsgCyclicTime" BO_ 14 200;
+BA_ "GenMsgCyclicTime" BO_ 13 10;
+BA_ "GenMsgSendType" BO_ 13 0;
+BA_ "GenMsgCyclicTime" BO_ 11 10;
+BA_ "GenMsgSendType" BO_ 11 0;
+BA_ "GenMsgCyclicTime" BO_ 6 10;
+BA_ "GenMsgSendType" BO_ 6 0;
+BA_ "GenMsgCyclicTime" BO_ 5 10;
+BA_ "GenMsgSendType" BO_ 5 0;
+BA_ "GenMsgCyclicTime" BO_ 4 10;
+BA_ "GenMsgSendType" BO_ 4 0;
+BA_ "GenMsgCyclicTime" BO_ 2 10;
+BA_ "GenMsgSendType" BO_ 2 0;
+BA_ "GenMsgCyclicTime" BO_ 1 10;
+BA_ "GenMsgSendType" BO_ 1 0;
+VAL_ 16 Pt_stIgnSwt 5 "IGN_START" 4 "IGN_ON" 3 "Free" 2 "IGN_ACC" 1 "IGN_OFF" 0 "IGN_LOCK" ;
+VAL_ 16 Pt_flgCrash 1 "Crash" 0 "No_Crash" ;
+VAL_ 14 Obd_stWrmupCdn 1 " Conditions fulfilled" 0 "Conditions not fulfilled" ;
+VAL_ 14 Obd_stIgnCycEngRunngCdn 2 "Fault" 1 "Conditions fulfilled" 0 "Conditions not fulfilled" ;
+VAL_ 14 Obd_stIgnCycCdn 2 "Fault" 1 "Conditions fulfilled" 0 "Conditions not fulfilled" ;
+VAL_ 14 Obd_stGnrlDenomPdtcDltCdn 1 " Conditions fulfilled" 0 "Conditions not fulfilled" ;
+VAL_ 14 Obd_stGnrlDenomCdn 2 "Fault" 1 "Conditions fulfilled" 0 "Conditions not fulfilled" ;
+VAL_ 14 Obd_stDcycCdn 2 "Fault" 1 "Conditions fulfilled" 0 "Conditions not fulfilled" ;
+VAL_ 14 Obd_stColdStrtDenomCdn 2 "Fault" 1 "Conditions fulfilled" 0 "Conditions not fulfilled" ;
+VAL_ 11 Eem_stRlyMvbEdrv 3 "Precharge" 2 "Open" 1 "Opening request" 0 "Closed" ;
+VAL_ 6 Edrv_stActDern 15 "FREE" 14 "FREE" 13 "FREE" 12 "FREE" 11 "FREE" 10 "FREE" 9 "FREE" 8 "FREE" 7 "derating: phase current limit" 6 "derating: motor temp limitation" 5 "derating: inverter limitation" 4 "derating: speed limitation" 3 "derating: torque limitation" 2 "derating: DC current limitation" 1 "derating: DC voltage limitation" 0 " no derating" ;
+VAL_ 4 Edrv_stStrtPsbl 2 "Not Possible" 1 "Critical" 0 "Possible" ;
+VAL_ 4 Edrv_stTq 2 "Not Possible" 1 "Critical" 0 "Possible" ;
+VAL_ 2 Edrv_stRunAct 3 "TORQUE_SNA" 2 "TORQUE_SMALLER" 1 "TORQUE_BIGGER" 0 "TORQUE_PLAUSIBLE" ;
+VAL_ 2 Edrv_stOperModAct 15 "Error" 14 "Standby" 13 "Free" 12 "Reserved" 11 "Start" 10 "Reserved" 9 "Reserved" 8 "Free" 7 "Free" 6 "Speed" 5 "Reserved" 4 "Voltage" 3 "Reserved" 2 "Free" 1 "Torque" 0 "Idle" ;
+VAL_ 1 Pt_stOperModDesEdrv 15 "Reserved" 14 "Reserved" 13 "Free" 12 "Reserved" 11 "Start" 10 "Reserved" 9 "Reserved" 8 "Free" 7 "Free" 6 "Speed" 5 "Reserved" 4 "Voltage" 3 "Reserved" 2 "Free" 1 "Torque" 0 "Idle" ;
+
