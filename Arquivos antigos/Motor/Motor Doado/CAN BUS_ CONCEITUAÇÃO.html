@@ -1,0 +1,741 @@
+
+<!-- saved from url=(0045)http://www.alexag.com.br/CAN_Bus_Parte_2.html -->
+<html xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns:dt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882" xmlns="http://www.w3.org/TR/REC-html40"><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Microsoft Theme 2.00" content="blends 111">
+
+<meta name="ProgId" content="Word.Document">
+<meta name="Generator" content="Microsoft Word 9">
+<meta name="Originator" content="Microsoft Word 9">
+<link rel="File-List" href="http://www.alexag.com.br/CAN_Bus_Parte_2_files/filelist.xml">
+<link rel="Edit-Time-Data" href="http://www.alexag.com.br/CAN_Bus_Parte_2_files/editdata.mso">
+<link rel="OLE-Object-Data" href="http://www.alexag.com.br/CAN_Bus_Parte_2_files/oledata.mso">
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]-->
+<title>CAN BUS: CONCEITUAÇÃO</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>vz1kqb</o:Author>
+  <o:Template>Normal</o:Template>
+  <o:LastAuthor> AAG</o:LastAuthor>
+  <o:Revision>4</o:Revision>
+  <o:TotalTime>8</o:TotalTime>
+  <o:Created>2004-03-14T05:28:00Z</o:Created>
+  <o:LastSaved>2008-01-04T12:59:00Z</o:LastSaved>
+  <o:Pages>7</o:Pages>
+  <o:Words>2194</o:Words>
+  <o:Characters>12511</o:Characters>
+  <o:Company>GM</o:Company>
+  <o:Lines>104</o:Lines>
+  <o:Paragraphs>25</o:Paragraphs>
+  <o:CharactersWithSpaces>15364</o:CharactersWithSpaces>
+  <o:Version>9.2720</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]-->
+<style>
+<!--
+ /* Font Definitions */
+@font-face
+	{font-family:"Trebuchet MS";
+	panose-1:2 11 6 3 2 2 2 2 2 4;
+	mso-font-charset:0;
+	mso-generic-font-family:swiss;
+	mso-font-pitch:variable;
+	mso-font-signature:647 0 0 0 159 0;}
+ /* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0cm;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Trebuchet MS";
+	mso-fareast-font-family:"Times New Roman";
+	mso-bidi-font-family:"Times New Roman";
+	color:black;}
+h1
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0cm;
+	margin-bottom:3.0pt;
+	margin-left:0cm;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:1;
+	font-size:24.0pt;
+	font-family:"Trebuchet MS";
+	color:blue;
+	mso-font-kerning:16.0pt;
+	font-weight:normal;
+	mso-bidi-font-weight:bold;}
+h2
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0cm;
+	margin-bottom:3.0pt;
+	margin-left:0cm;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:2;
+	font-size:18.0pt;
+	font-family:"Trebuchet MS";
+	color:blue;
+	font-weight:normal;
+	mso-bidi-font-weight:bold;
+	mso-bidi-font-style:italic;}
+h3
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0cm;
+	margin-bottom:3.0pt;
+	margin-left:0cm;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:3;
+	font-size:14.0pt;
+	font-family:"Trebuchet MS";
+	color:blue;
+	font-weight:normal;
+	mso-bidi-font-weight:bold;}
+h4
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0cm;
+	margin-bottom:3.0pt;
+	margin-left:0cm;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:4;
+	font-size:12.0pt;
+	font-family:"Trebuchet MS";
+	color:blue;
+	font-weight:normal;
+	mso-bidi-font-weight:bold;}
+h5
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0cm;
+	margin-bottom:3.0pt;
+	margin-left:0cm;
+	mso-pagination:widow-orphan;
+	mso-outline-level:5;
+	font-size:10.0pt;
+	font-family:"Trebuchet MS";
+	color:blue;
+	font-weight:normal;
+	mso-bidi-font-weight:bold;
+	mso-bidi-font-style:italic;}
+h6
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0cm;
+	margin-bottom:3.0pt;
+	margin-left:0cm;
+	mso-pagination:widow-orphan;
+	mso-outline-level:6;
+	font-size:8.0pt;
+	font-family:"Trebuchet MS";
+	color:blue;
+	font-weight:normal;
+	mso-bidi-font-weight:bold;}
+p.MsoCaption, li.MsoCaption, div.MsoCaption
+	{mso-style-parent:"";
+	mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0cm;
+	margin-bottom:24.0pt;
+	margin-left:0cm;
+	text-align:center;
+	mso-pagination:widow-orphan lines-together;
+	font-size:12.0pt;
+	mso-bidi-font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:PT-BR;
+	mso-fareast-language:PT-BR;
+	font-weight:bold;
+	mso-bidi-font-weight:normal;}
+p.MsoBodyText, li.MsoBodyText, div.MsoBodyText
+	{margin-top:0cm;
+	margin-right:0cm;
+	margin-bottom:12.0pt;
+	margin-left:0cm;
+	text-align:justify;
+	line-height:150%;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	mso-bidi-font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:PT-BR;
+	mso-fareast-language:PT-BR;}
+a:link, span.MsoHyperlink
+	{color:#993300;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+@page Section1
+	{size:612.0pt 792.0pt;
+	margin:72.0pt 90.0pt 72.0pt 90.0pt;
+	mso-header-margin:36.0pt;
+	mso-footer-margin:36.0pt;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+ /* List Definitions */
+@list l0
+	{mso-list-id:1793866710;
+	mso-list-type:hybrid;
+	mso-list-template-ids:1610007276 67698689 67698691 67698693 67698689 67698691 67698693 67698689 67698691 67698693;}
+@list l0:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:36.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;
+	font-family:Symbol;}
+ol
+	{margin-bottom:0cm;}
+ul
+	{margin-bottom:0cm;}
+-->
+</style>
+<!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="1034">
+  <o:colormenu v:ext="edit" fillcolor="none"/>
+ </o:shapedefaults></xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
+</head>
+
+<body lang="EN-US" link="#993300" vlink="blue" style="tab-interval:36.0pt" cz-shortcut-listen="true" data-new-gr-c-s-check-loaded="14.1049.0" data-gr-ext-installed="">
+
+<div class="Section1">
+
+<p class="MsoBodyText" align="center" style="margin-bottom:0cm;margin-bottom:.0001pt;
+text-align:center;line-height:normal"><b><span style="font-size:16.0pt;
+mso-bidi-font-size:10.0pt;font-family:Arial;color:blue;mso-ansi-language:EN-US">CAN
+BUS<o:p></o:p></span></b></p>
+
+<p class="MsoBodyText" align="center" style="margin-bottom:0cm;margin-bottom:.0001pt;
+text-align:center;line-height:normal"><b><span style="font-size:10.0pt;
+font-family:Arial;color:blue;mso-ansi-language:EN-US"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></b></p>
+
+<p class="MsoBodyText" align="center" style="margin-bottom:0cm;margin-bottom:.0001pt;
+text-align:center;line-height:normal"><b><span style="font-size:16.0pt;
+mso-bidi-font-size:10.0pt;font-family:Arial;color:blue;mso-ansi-language:EN-US">BARRAMENTO
+CONTROLLER AREA NETWORK<o:p></o:p></span></b></p>
+
+<p class="MsoBodyText" align="center" style="margin-bottom:0cm;margin-bottom:.0001pt;
+text-align:center;line-height:normal"><b><span style="font-size:10.0pt;
+font-family:Arial;color:blue;mso-ansi-language:EN-US"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></b></p>
+
+<p class="MsoBodyText" align="center" style="margin-bottom:0cm;margin-bottom:.0001pt;
+text-align:center;line-height:normal"><b><span lang="PT-BR" style="font-size:
+16.0pt;mso-bidi-font-size:10.0pt;font-family:Arial;color:blue">“CONCEITUAÇÃO”<o:p></o:p></span></b></p>
+
+<p class="MsoBodyText" align="center" style="margin-bottom:0cm;margin-bottom:.0001pt;
+text-align:center;line-height:normal"><b><span lang="PT-BR" style="font-size:
+14.0pt;mso-bidi-font-size:10.0pt;font-family:Arial;color:blue"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></b></p>
+
+<p class="MsoBodyText" align="center" style="margin-bottom:0cm;margin-bottom:.0001pt;
+text-align:center;line-height:normal"><b><span lang="PT-BR" style="font-size:
+14.0pt;mso-bidi-font-size:10.0pt;font-family:Arial;color:blue"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></b></p>
+
+<p class="MsoBodyText" align="center" style="margin-bottom:0cm;margin-bottom:.0001pt;
+text-align:center;line-height:normal"><b><span lang="PT-BR" style="font-size:
+14.0pt;mso-bidi-font-size:10.0pt;font-family:Arial;color:blue"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></b></p>
+
+<p class="MsoBodyText" align="center" style="margin-bottom:0cm;margin-bottom:.0001pt;
+text-align:center;line-height:normal"><b><span lang="PT-BR" style="font-size:
+14.0pt;mso-bidi-font-size:10.0pt;font-family:Arial;color:blue"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></b></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><b><span lang="PT-BR" style="font-family:Arial">INTRODUÇÃO<o:p></o:p></span></b></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><span lang="PT-BR" style="font-family:Arial">A <a href="http://www.alexag.com.br/CAN_Bus_Parte_1.html">primeira
+parte deste artigo</a> procurou explicar os dois principais conceitos de <b>Arquitetura
+Eletro-Eletrônica</b> existentes – o <b>Centralizado</b> e o <b>Distribuído</b>.
+Além de destacadas as vantagens e desvantagens de ambos os conceitos, foram
+mencionados dois exemplos de aplicação, um fundamentado no sistema Centralizado
+e outro no Distribuído.<o:p></o:p></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><span lang="PT-BR" style="font-family:Arial">Percebemos que, para a viabilização do
+sistema, especialmente no conceito Distribuído, é extremamente necessária a
+utilização de um <b>Protocolo de Comunicação</b>. Neste sentido, o <b>CAN Bus </b>mostra-se
+o mais adequado se considerada a aplicação em questão: <b>Eletrônica Embarcada </b>em
+veículos automotivos.<o:p></o:p></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><span lang="PT-BR" style="font-family:Arial">Vamos então ao Protocolo !<o:p></o:p></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><span lang="PT-BR" style="font-family:Arial"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><b><span lang="PT-BR" style="font-family:Arial">HISTÓRICO<o:p></o:p></span></b></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><span lang="PT-BR" style="font-family:Arial">O CAN Bus (ou Barramento <i>Controller
+Area Network</i>) foi desenvolvido pela empresa alemã Robert BOSCH e
+disponibilizado em meados dos anos 80. Sua aplicação inicial foi realizada em
+ônibus e caminhões. Atualmente, é utilizado na indústria, em veículos
+automotivos, navios e tratores, entre outros.<o:p></o:p></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><span lang="PT-BR" style="font-family:Arial"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><b><span lang="PT-BR" style="font-family:Arial">CONCEITUAÇÃO BÁSICA<o:p></o:p></span></b></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><span lang="PT-BR" style="font-family:Arial">O CAN é um <b>protocolo de comunicação
+serial síncrono</b>. O sincronismo entre os módulos conectados a rede é feito
+em relação ao início de cada mensagem lançada ao barramento (evento que ocorre
+em intervalos de tempo conhecidos e regulares).<o:p></o:p></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><span lang="PT-BR" style="font-family:Arial">Trabalha baseado no conceito <b>multi-mestre</b>,
+onde todos os módulos podem se tornar mestre em determinado momento e escravo
+em outro, além de suas mensagens serem enviadas em regime <b><i>multicast</i></b>,
+caracterizado pelo envio de toda e qualquer mensagem para todos os módulos
+existentes na rede.<o:p></o:p></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><span lang="PT-BR" style="font-family:Arial">Outro ponto forte deste protocolo é o fato
+de ser fundamentado no conceito <b>CSMA/CD <i>with</i> NDA</b> (<i>Carrier
+Sense Multiple Access / Collision Detection with Non-Destructive Arbitration</i>).
+Isto significa que todos os módulos verificam o estado do barramento,
+analisando se outro módulo está ou não enviando mensagens com maior prioridade.
+Caso isto seja percebido, o módulo cuja mensagem tiver menor prioridade cessará
+sua transmissão e o de maior prioridade continuará enviando sua mensagem deste
+ponto, sem ter que reiniciá-la.<o:p></o:p></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><span lang="PT-BR" style="font-family:Arial">Outro conceito bastante interessante é o <b>NRZ</b>
+(<i>Non Return to Zero</i>), onde cada bit (0 ou 1) é transmitido por um valor
+de tensão específico e constante.<o:p></o:p></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><span lang="PT-BR" style="font-family:Arial">A <b>velocidade de transmissão dos dados</b>
+é inversamente proporcional ao comprimento do barramento. A maior taxa de
+transmissão especificada é de 1Mbps considerando-se um barramento de 40 metros.
+A Figura 1 representa a relação entre o comprimento da rede (barramento) e a taxa
+de transmissão dos dados.<o:p></o:p></span></p>
+
+<p class="MsoBodyText" align="center" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:
+auto;text-align:center"><span lang="PT-BR" style="font-family:Arial"><!--[if gte vml 1]><v:shapetype
+ id="_x0000_t75" coordsize="21600,21600" o:spt="75" o:preferrelative="t"
+ path="m@4@5l@4@11@9@11@9@5xe" filled="f" stroked="f">
+ <v:stroke joinstyle="miter"/>
+ <v:formulas>
+  <v:f eqn="if lineDrawn pixelLineWidth 0"/>
+  <v:f eqn="sum @0 1 0"/>
+  <v:f eqn="sum 0 0 @1"/>
+  <v:f eqn="prod @2 1 2"/>
+  <v:f eqn="prod @3 21600 pixelWidth"/>
+  <v:f eqn="prod @3 21600 pixelHeight"/>
+  <v:f eqn="sum @0 0 1"/>
+  <v:f eqn="prod @6 1 2"/>
+  <v:f eqn="prod @7 21600 pixelWidth"/>
+  <v:f eqn="sum @8 21600 0"/>
+  <v:f eqn="prod @7 21600 pixelHeight"/>
+  <v:f eqn="sum @10 21600 0"/>
+ </v:formulas>
+ <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
+ <o:lock v:ext="edit" aspectratio="t"/>
+</v:shapetype><v:shape id="_x0000_i1025" type="#_x0000_t75" style='width:205.5pt;
+ height:153.75pt' o:ole="">
+ <v:imagedata src="./CAN_Bus_Parte_2_files/image001.png" o:title=""/>
+</v:shape><![endif]--><!--[if !vml]--><img border="0" width="274" height="205" src="./CAN BUS_ CONCEITUAÇÃO_files/image002.jpg" v:shapes="_x0000_i1025"><!--[endif]--><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="PBrush" ShapeID="_x0000_i1025"
+  DrawAspect="Content" ObjectID="_1260960337">
+ </o:OLEObject>
+</xml><![endif]--><o:p></o:p></span></p>
+
+<p class="MsoCaption" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+line-height:150%"><span lang="PT-BR" style="font-family:Arial">Figura 1<o:p></o:p></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><span lang="PT-BR" style="font-family:Arial"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><span lang="PT-BR" style="font-family:Arial">Considerando-se fios elétricos como o meio
+de transmissão dos dados, existem três formas de se constituir um barramento
+CAN, dependentes diretamente da quantidade de fios utilizada. Existem redes baseadas
+em 1, 2 e 4 fios. As redes com 2 e 4 fios trabalham com os sinais de dados <b>CAN_H
+(CAN <i>High</i>)</b> e <b>CAN_L (CAN <i>Low</i>)</b>. No caso dos barramentos
+com 4 fios, além dos sinais de dados, um fio com o VCC (alimentação) e outro
+com o GND (referência) fazem parte do barramento, levando a alimentação às duas
+terminações ativas da rede. As redes com apenas 1 fio têm este, o fio de dados,
+chamado exclusivamente de linha CAN.<o:p></o:p></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><span lang="PT-BR" style="font-family:Arial">Considerando o CAN fundamentado em 2 e 4
+fios, seus condutores elétricos devem ser trançados e não blindados. Os dados
+enviados através da rede devem ser interpretados pela análise da diferença de
+potencial entre os fios CAN_H e CAN_L. Por isso, o barramento CAN é
+classificado como <b>Par Trançado Diferencial</b>. Este conceito atenua
+fortemente os efeitos causados por interferências eletro-magnéticas, uma vez
+que qualquer ação sobre um dos fios será sentida também pelo outro, causando
+flutuação em ambos os sinais para o mesmo sentido e com a mesma intensidade.
+Como o que vale para os módulos que recebem as mensagens é a diferença de
+potencial entre os condutores CAN_H e CAN_L (e esta permanecerá inalterada), a
+comunicação não é prejudicada.<o:p></o:p></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><span lang="PT-BR" style="font-family:Arial">No CAN, os dados não são representados por
+bits em nível “0” ou nível “1”. São representados por <b>bits Dominantes</b> e <b>bits
+Recessivos</b>, criados em função da condição presente nos fios CAN_H e CAN_L.
+A Figura 2 ilustra os níveis de tensão em uma rede CAN, assim como os bits
+Dominantes e Recessivos.<o:p></o:p></span></p>
+
+<p class="MsoBodyText" align="center" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:
+auto;text-align:center"><span lang="PT-BR" style="font-family:Arial"><!--[if gte vml 1]><v:shape
+ id="_x0000_i1026" type="#_x0000_t75" style='width:275.25pt;height:140.25pt'
+ o:ole="">
+ <v:imagedata src="./CAN_Bus_Parte_2_files/image003.png" o:title=""/>
+</v:shape><![endif]--><!--[if !vml]--><img border="0" width="367" height="187" src="./CAN BUS_ CONCEITUAÇÃO_files/image004.jpg" v:shapes="_x0000_i1026"><!--[endif]--><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="PBrush" ShapeID="_x0000_i1026"
+  DrawAspect="Content" ObjectID="_1260960338">
+ </o:OLEObject>
+</xml><![endif]--><o:p></o:p></span></p>
+
+<p class="MsoCaption" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+line-height:150%"><span lang="PT-BR" style="font-family:Arial">Figura 2<o:p></o:p></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><a name="_Toc32934930"><span lang="PT-BR" style="font-family:Arial"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></a></p>
+
+<span style="mso-bookmark:_Toc32934930"></span>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><span lang="PT-BR" style="font-family:Arial">Como mencionado no início, todos os
+módulos podem ser mestre e enviar suas mensagens. Para tanto, o protocolo é
+suficientemente robusto para evitar a colisão entre mensagens, utilizando-se de
+uma <b>arbitragem bit a bit não destrutiva</b>. Podemos exemplificar esta
+situação, analisando o comportamento de dois módulos enviando, ao mesmo tempo,
+mensagens diferentes. Após enviar um bit, cada módulo analisa o barramento e
+verifica se outro módulo na rede o sobrescreveu (vale acrescentar que um bit
+Dominante sobrescreve eletricamente um Recessivo). Um módulo interromperá
+imediatamente sua transmissão, caso perceba que existe outro módulo
+transmitindo uma mensagem com prioridade maior (quando seu bit recessivo é
+sobrescrito por um dominante). Este módulo, com maior prioridade, continuará
+normalmente sua transmissão.<o:p></o:p></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><span lang="PT-BR" style="font-family:Arial"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><a name="_Toc32934987"><b><span lang="PT-BR" style="font-family:Arial">FORMATOS DAS
+MENSAGENS</span></b></a><b><span lang="PT-BR" style="font-family:Arial"><o:p></o:p></span></b></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><span lang="PT-BR" style="font-family:Arial">Existem dois formatos de mensagens no
+protocolo CAN:<o:p></o:p></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><b><span lang="PT-BR" style="font-family:Arial">CAN 2.0A –</span></b><span lang="PT-BR" style="font-family:Arial"> <i>Mensagens com identificador de 11 bits</i>. É
+possível ter até 2048 mensagens em uma rede constituída sob este formato, o que
+pode caracterizar uma limitação em determinadas aplicações. A Figura 3
+apresenta o quadro de mensagem do CAN 2.0A.<o:p></o:p></span></p>
+
+<p class="MsoBodyText" align="center" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:
+auto;text-align:center"><span lang="PT-BR" style="font-family:Arial"><!--[if gte vml 1]><v:shape
+ id="_x0000_i1027" type="#_x0000_t75" style='width:324pt;height:1in' o:ole="">
+ <v:imagedata src="./CAN_Bus_Parte_2_files/image005.png" o:title=""/>
+</v:shape><![endif]--><!--[if !vml]--><img border="0" width="432" height="96" src="./CAN BUS_ CONCEITUAÇÃO_files/image006.jpg" v:shapes="_x0000_i1027"><!--[endif]--><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="PBrush" ShapeID="_x0000_i1027"
+  DrawAspect="Content" ObjectID="_1260960339">
+ </o:OLEObject>
+</xml><![endif]--><o:p></o:p></span></p>
+
+<p class="MsoCaption" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+line-height:150%"><span lang="PT-BR" style="font-family:Arial">Figura 3<o:p></o:p></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><span lang="PT-BR" style="font-family:Arial"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><b><span lang="PT-BR" style="font-family:Arial">CAN 2.0B – </span></b><i><span lang="PT-BR" style="font-family:Arial">Mensagens com identificador de 29 bits</span></i><span lang="PT-BR" style="font-family:Arial">. É possível ter, aproximadamente, 537
+milhões de mensagens em uma rede constituída sob este formato. Percebe-se que a
+limitação em virtude da quantidade de mensagens não mais existe. Por outro
+lado, o que pode ser observado em alguns casos é que, os 18 bits adicionais no
+identificador aumentam o tempo de transmissão de cada mensagem, o que pode
+caracterizar um problema em determinadas aplicações que trabalhem em tempo-real
+(problema conhecido como <i>overhead</i>). A Figura 4 apresenta o quadro de
+mensagem do formato CAN 2.0B.<o:p></o:p></span></p>
+
+<p class="MsoBodyText" align="center" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:
+auto;text-align:center"><span lang="PT-BR" style="font-family:Arial"><!--[if gte vml 1]><v:shape
+ id="_x0000_i1028" type="#_x0000_t75" style='width:366pt;height:63pt' o:ole="">
+ <v:imagedata src="./CAN_Bus_Parte_2_files/image007.png" o:title=""/>
+</v:shape><![endif]--><!--[if !vml]--><img border="0" width="488" height="84" src="./CAN BUS_ CONCEITUAÇÃO_files/image008.jpg" v:shapes="_x0000_i1028"><!--[endif]--><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="PBrush" ShapeID="_x0000_i1028"
+  DrawAspect="Content" ObjectID="_1260960340">
+ </o:OLEObject>
+</xml><![endif]--><o:p></o:p></span></p>
+
+<p class="MsoCaption" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+line-height:150%"><a name="_Toc32934988"><span lang="PT-BR" style="font-family:
+Arial">Figura 4<o:p></o:p></span></a></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><span style="mso-bookmark:_Toc32934988"><span lang="PT-BR" style="font-family:Arial"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><span style="mso-bookmark:_Toc32934988"><b><span lang="PT-BR" style="font-family:Arial">PADRÕES
+EXISTENTES</span></b></span><span style="mso-bookmark:_Toc32934988"></span><span lang="PT-BR" style="font-family:Arial"><o:p></o:p></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><span lang="PT-BR" style="font-family:Arial">Os fundamentos do CAN são especificados
+por duas normas: a <b>ISO11898</b> e a <b>ISO11519-2</b>. A primeira, ISO11898,
+determina as características de uma rede trabalhando com alta velocidade de
+transmissão de dados (de 125Kbps a 1Mbps). A segunda, ISO11519-2, determina as
+características de uma rede trabalhando com baixa velocidade (de 10Kbps a
+125Kbps).<o:p></o:p></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><span lang="PT-BR" style="font-family:Arial">Ambos os padrões especificam as camadas
+Física e de Dados, respectivamente 1 e 2 se considerado o padrão de comunicação
+OSI de 7 camadas (ISO7498). As demais camadas, da 3 à 7, são especificadas por
+outros padrões, cada qual relacionado a uma aplicação específica.<o:p></o:p></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><span lang="PT-BR" style="font-family:Arial">Existem diversos padrões fundamentados no
+CAN, dentre os quais podemos destacar:<o:p></o:p></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;tab-stops:-148.5pt list 18.0pt 36.0pt"><!--[if !supportLists]--><span lang="PT-BR" style="font-family:Symbol;mso-bidi-font-family:Arial">·<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><!--[endif]--><b><span lang="PT-BR" style="font-family:Arial">NMEA 2000</span></b><span lang="PT-BR" style="font-family:Arial">: Baseado no CAN 2.0B e utilizado em
+aplicações navais e aéreas.<o:p></o:p></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;tab-stops:-148.5pt list 18.0pt 36.0pt"><!--[if !supportLists]--><span lang="PT-BR" style="font-family:Symbol;mso-bidi-font-family:Arial">·<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><!--[endif]--><b><span lang="PT-BR" style="font-family:Arial">SAE J1939</span></b><span lang="PT-BR" style="font-family:Arial">: Baseado no CAN 2.0B e utilizado em aplicações
+automotivas, especialmente ônibus e caminhões.<o:p></o:p></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;tab-stops:-148.5pt list 18.0pt 36.0pt"><!--[if !supportLists]--><span lang="PT-BR" style="font-family:Symbol;mso-bidi-font-family:Arial">·<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><!--[endif]--><b><span lang="PT-BR" style="font-family:Arial">DIN 9684
+– LBS</span></b><span lang="PT-BR" style="font-family:Arial">: Baseado no CAN
+2.0A e utilizado em aplicações agrícolas.<o:p></o:p></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;tab-stops:-148.5pt list 18.0pt 36.0pt"><!--[if !supportLists]--><span lang="PT-BR" style="font-family:Symbol;mso-bidi-font-family:Arial">·<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><!--[endif]--><b><span lang="PT-BR" style="font-family:Arial">ISO 11783</span></b><span lang="PT-BR" style="font-family:Arial">: Baseado no CAN 2.0B e também utilizado
+em aplicações agrícolas.<o:p></o:p></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><span lang="PT-BR" style="font-family:Arial"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><span lang="PT-BR" style="font-family:Arial">Estes padrões especificam o equivalente às
+camadas de Rede (3), Transporte (4), Sessão (5), Apresentação (6) e Aplicação
+(7), do padrão OSI, incluindo-se as mensagens pertinentes ao dicionário de
+dados de cada aplicação em especial.<o:p></o:p></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><span lang="PT-BR" style="font-family:Arial"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><a name="_Toc32934989"><b><span lang="PT-BR" style="font-family:Arial">DETECÇÃO DE
+FALHAS</span></b></a><span style="mso-bookmark:_Toc32934989"></span><span lang="PT-BR" style="font-family:Arial"><o:p></o:p></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><span lang="PT-BR" style="font-family:Arial">Algumas das maiores vantagens do CAN é a
+sua robustez e a capacidade de se adaptar às condições de falha, temporárias
+e/ou permanentes. Podemos classificar as falhas de uma rede CAN em três
+categorias ou níveis: Nível de Bit, Nível de Mensagem e Nível Físico.<o:p></o:p></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><b><span lang="PT-BR" style="font-family:Arial">Nível de Bit – </span></b><span lang="PT-BR" style="font-family:Arial">Possui dois tipos de erro possíveis:<o:p></o:p></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><i><span lang="PT-BR" style="font-family:Arial">Bit Monitoring:</span></i><span lang="PT-BR" style="font-family:Arial"> Após a escrita de um bit dominante, o
+módulo transmissor verifica o estado do barramento. Se o bit lido for
+recessivo, significará que existe um erro no barramento.<o:p></o:p></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><i><span lang="PT-BR" style="font-family:Arial">Bit Stuffing:</span></i><span lang="PT-BR" style="font-family:Arial"> Apenas cinco bits consecutivos podem ter o mesmo
+valor (dominante ou recessivo). Caso seja necessário transmitir seqüencialmente
+seis ou mais bits de mesmo valor, o módulo transmissor inserirá, imediatamente
+após cada grupo de cinco bits consecutivos iguais, um bit de valor contrário. O
+módulo receptor ficará encarregado de, durante a leitura, retirar este bit,
+chamado de <i>Stuff Bit</i>. Caso uma mensagem seja recebida com pelo menos
+seis bits consecutivos iguais, algo de errado terá ocorrido no barramento.<o:p></o:p></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><span lang="PT-BR" style="font-family:Arial"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><b><span lang="PT-BR" style="font-family:Arial">Nível de Mensagem –</span></b><span lang="PT-BR" style="font-family:Arial"> São três os tipos de erro possíveis:<o:p></o:p></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><i><span lang="PT-BR" style="font-family:Arial">CRC ou Cyclic Redundancy Check:</span></i><span lang="PT-BR" style="font-family:Arial"> Funciona como um <i>checksum</i>. O
+módulo transmissor calcula um valor em função dos bits da mensagem e o
+transmite juntamente com ela. Os módulos receptores recalculam este CRC e
+verificam se este é igual ao transmitido com a mensagem.<o:p></o:p></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><i><span lang="PT-BR" style="font-family:Arial">Frame Check:</span></i><span lang="PT-BR" style="font-family:Arial"> Os módulos receptores analisam o conteúdo de alguns
+bits da mensagem recebida. Estes bits (seus valores) não mudam de mensagem para
+mensagem e são determinados pelo padrão CAN.<o:p></o:p></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><i><span lang="PT-BR" style="font-family:Arial">Acknowledgment Error Check:</span></i><span lang="PT-BR" style="font-family:Arial"> Os módulos receptores respondem a cada
+mensagem íntegra recebida, escrevendo um bit dominante no campo ACK de uma
+mensagem resposta que é enviada ao módulo transmissor. Caso esta mensagem
+resposta não seja recebida (pelo transmissor original da mensagem), significará
+que, ou a mensagem de dados transmitida estava corrompida, ou nenhum módulo a
+recebeu.<o:p></o:p></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><span lang="PT-BR" style="font-family:Arial">Toda e qualquer falha acima mencionada,
+quando detectada por um ou mais módulos receptores, fará com que estes coloquem
+uma mensagem de erro no barramento, avisando toda a rede de que aquela mensagem
+continha um erro e que o transmissor deverá reenviá-la.<o:p></o:p></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><span lang="PT-BR" style="font-family:Arial">Além disso, a cada mensagem erroneamente
+transmitida ou recebida, um contador de erros é incrementado em uma unidade nos
+módulos receptores, e em oito unidades no transmissor. Módulos com estes
+contadores iguais a zero são considerados Normais. Para os casos em que os
+contadores contêm valores entre 1 e 127, os módulos são considerados <i>Error
+Active</i>. Contadores contendo valores entre 128 e 255 colocam os módulos em
+condição de <i>Error Passive</i>. Finalmente, para contadores contendo valores
+superiores a 255, os módulos serão considerados em <i>Bus Off</i> e passarão a
+não mais atuar no barramento. Estes contadores também são decrementados a
+medida que mensagens corretas são recebidas, o que reduz o grau de incerteza em
+relação a atividade dos módulos ora com contadores contendo valores diferentes
+de zero e possibilita novamente a plena participação deles no barramento.<o:p></o:p></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><span lang="PT-BR" style="font-family:Arial"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><b><span lang="PT-BR" style="font-family:Arial">Nível Físico –</span></b><span lang="PT-BR" style="font-family:Arial"> Para os barramentos com 2 e 4 fios, caso algo de
+errado venha a ocorrer com os fios de dados CAN_H e CAN_L, a rede continuará
+operando sob uma espécie de modo de segurança. Seguem abaixo algumas das
+condições de falha nas linhas de comunicação que permitem a continuidade das
+atividades da rede:<o:p></o:p></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;tab-stops:-148.5pt list 18.0pt 36.0pt"><!--[if !supportLists]--><span lang="PT-BR" style="font-family:Symbol;mso-bidi-font-family:Arial">·<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><!--[endif]--><span lang="PT-BR" style="font-family:Arial">Curto do
+CAN_H (ou CAN_L) para GND (ou VCC);<o:p></o:p></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;tab-stops:-148.5pt list 18.0pt 36.0pt"><!--[if !supportLists]--><span lang="PT-BR" style="font-family:Symbol;mso-bidi-font-family:Arial">·<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><!--[endif]--><span lang="PT-BR" style="font-family:Arial">Curto entre
+os fios de dados CAN_H e CAN_L;<o:p></o:p></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;tab-stops:-148.5pt list 18.0pt 36.0pt"><!--[if !supportLists]--><span lang="PT-BR" style="font-family:Symbol;mso-bidi-font-family:Arial">·<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><!--[endif]--><span lang="PT-BR" style="font-family:Arial">Ruptura do
+CAN_H (ou CAN_L);<o:p></o:p></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><a name="_Toc32934990"><span lang="PT-BR" style="font-family:Arial"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></a></p>
+
+<span style="mso-bookmark:_Toc32934990"></span>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><b><span lang="PT-BR" style="font-family:Arial">ASPECTOS DE IMPLEMENTAÇÃO: DICIONÁRIO DE
+DADOS</span></b><span lang="PT-BR" style="font-family:Arial"><o:p></o:p></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><span lang="PT-BR" style="font-family:Arial">É a parte mais dedicada à aplicação quando
+se trabalha com um protocolo como o CAN. O <b>Dicionário de Dados </b>(ou <i>Data
+Dictionary</i>) é o conjunto de mensagens que podem ser transmitidas naquela
+determinada rede.<o:p></o:p></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><span lang="PT-BR" style="font-family:Arial">A forma mais interessante de se organizar
+um dicionário de dados é criando uma matriz com todos os módulos da rede. Esta matriz
+mostrará cada mensagem sob a responsabilidade de cada módulo, relacionando quem
+a transmite e quem a recebe. Outros dados importantes nesta matriz são: o tempo
+de atualização dos valores da mensagem, o intervalo de transmissão da mesma e o
+valor relativo ao seu identificador. Além desta matriz, a documentação
+referente ao Dicionário de Dados deverá conter uma descrição detalhada de cada
+mensagem, bit a bit.<o:p></o:p></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><span lang="PT-BR" style="font-family:Arial">O Dicionário de Dados é implementado numa
+rede CAN via software e deverá ser o mesmo (ter a mesma versão de atualização,
+inclusive) em todos os módulos conectados à rede. Isto garantirá total
+compatibilidade entre os participantes do barramento.<o:p></o:p></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><a name="_Toc32934992"><span lang="PT-BR" style="font-family:Arial"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></a></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><span style="mso-bookmark:_Toc32934992"><b><span lang="PT-BR" style="font-family:Arial">ASPECTOS
+DE IMPLEMENTAÇÃO: EXEMPLO DE REDE</span></b></span><span style="mso-bookmark:
+_Toc32934992"></span><span lang="PT-BR" style="font-family:Arial"><o:p></o:p></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><span lang="PT-BR" style="font-family:Arial">Uma rede CAN, dependendo da sua aplicação,
+poderá ter até centenas de módulos conectados. O valor máximo para a conexão de
+módulos em um barramento depende da norma que se utiliza na dada aplicação.<o:p></o:p></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><span lang="PT-BR" style="font-family:Arial">Toda rede CAN possui 2 <b>Terminadores</b>.
+Estes terminadores nada mais são que resistores com valores entre 120 e 124
+ohms, conectados à rede para garantir a perfeita propagação dos sinais
+elétricos pelos fios da mesma. Estes resistores, um em cada ponta da rede,
+garantem a reflexão dos sinais no barramento e o correto funcionamento da rede
+CAN.<o:p></o:p></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><span lang="PT-BR" style="font-family:Arial">Outra característica de determinadas
+aplicações fundamentadas no CAN é que estas poderão ter duas ou mais sub-redes
+trabalhando, cada qual, em uma velocidade diferente. Os dados são transferidos
+de uma sub-rede para a outra através de módulos que atuam nas duas sub-redes.
+Estes módulos são chamados de <i>Gateways</i>.<o:p></o:p></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><span lang="PT-BR" style="font-family:Arial">A Figura 5 ilustra a rede CAN de um
+sistema automotivo, com duas sub-redes e dois terminadores. O <i>Gateway</i>
+desta aplicação é o Painel de Instrumentos.<o:p></o:p></span></p>
+
+<p class="MsoBodyText" align="center" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:
+auto;text-align:center"><span lang="PT-BR" style="font-family:Arial"><!--[if gte vml 1]><v:shape
+ id="_x0000_i1029" type="#_x0000_t75" style='width:365.25pt;height:148.5pt'
+ o:ole="">
+ <v:imagedata src="./CAN_Bus_Parte_2_files/image009.png" o:title=""/>
+</v:shape><![endif]--><!--[if !vml]--><img border="0" width="487" height="198" src="./CAN BUS_ CONCEITUAÇÃO_files/image010.jpg" v:shapes="_x0000_i1029"><!--[endif]--><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="PBrush" ShapeID="_x0000_i1029"
+  DrawAspect="Content" ObjectID="_1260960341">
+ </o:OLEObject>
+</xml><![endif]--><o:p></o:p></span></p>
+
+<p class="MsoCaption" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+line-height:150%"><a name="_Toc32934993"><span lang="PT-BR" style="font-family:
+Arial">Figura 5<o:p></o:p></span></a></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><span style="mso-bookmark:_Toc32934993"><span lang="PT-BR" style="font-family:Arial"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><span style="mso-bookmark:_Toc32934993"><b><span lang="PT-BR" style="font-family:Arial">ASPECTOS
+DE IMPLEMENTAÇÃO: MONTAGEM DA REDE</span></b></span><span style="mso-bookmark:
+_Toc32934993"></span><span lang="PT-BR" style="font-family:Arial"><o:p></o:p></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><b><span lang="PT-BR" style="font-family:Arial">Barramento</span></b><span lang="PT-BR" style="font-family:Arial"> é o termo técnico que representa os condutores
+elétricos das linhas de comunicação e a forma como eles são montados. Apesar de
+parecer simples, o ato de interligar os módulos requer bastante atenção.<o:p></o:p></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><span lang="PT-BR" style="font-family:Arial">Sobre o cabeamento necessário,
+considerando-se uma aplicação CAN de dois fios, deve-se utilizar par trançado
+onde a secção transversal de cada um dos fios deve ser de no mínimo 0,35mm².<o:p></o:p></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><span lang="PT-BR" style="font-family:Arial">As duas terminações (resistores de
+aproximadamente 120 ohms), do ponto de vista teórico, podem ser instaladas nas
+extremidades do chicote, diretamente nos fios de dados CAN_H e CAN_L. Do ponto
+de vista prático isto é extremamente complexo. O que deve ser feito é adicionar
+as terminações nas duas ECUs (Unidades Eletrônicas de Controle) conectadas aos
+extremos da rede. Se as ECUs forem montadas dependendo dos opcionais do
+veículo, deve-se procurar instalar as terminações nas ECUs que sempre estarão
+presentes nele (veículo). As terminações são mandatórias numa rede CAN.<o:p></o:p></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><span lang="PT-BR" style="font-family:Arial">No momento de se projetar o roteamento do
+barramento, algumas regras em relação ao comprimento dos chicotes devem ser
+observadas. O sincronismo das operações das ECUs no CAN é fundamentado no tempo
+de propagação física das mensagens no barramento. Assim, a relação do
+comprimento de determinados intervalos do chicote no barramento são
+fundamentais ao bom funcionamento da rede.<o:p></o:p></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><span lang="PT-BR" style="font-family:Arial">A Figura 6 mostra um diagrama que ilustra
+as medidas que devem ser observadas no desenvolvimento do chicote.<o:p></o:p></span></p>
+
+<p class="MsoBodyText" align="center" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:
+auto;text-align:center"><span lang="PT-BR" style="font-family:Arial"><!--[if gte vml 1]><v:shape
+ id="_x0000_i1030" type="#_x0000_t75" style='width:276.75pt;height:213pt'
+ o:ole="">
+ <v:imagedata src="./CAN_Bus_Parte_2_files/image011.png" o:title=""/>
+</v:shape><![endif]--><!--[if !vml]--><img border="0" width="369" height="284" src="./CAN BUS_ CONCEITUAÇÃO_files/image012.jpg" v:shapes="_x0000_i1030"><!--[endif]--><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="PBrush" ShapeID="_x0000_i1030"
+  DrawAspect="Content" ObjectID="_1260960342">
+ </o:OLEObject>
+</xml><![endif]--><o:p></o:p></span></p>
+
+<p class="MsoCaption" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+line-height:150%"><span lang="PT-BR" style="font-family:Arial">Figura 6<o:p></o:p></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><span lang="PT-BR" style="font-family:Arial"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><span lang="PT-BR" style="font-family:Arial">Destacamos que, após o barramento ser
+montado, caso seja necessário qualquer retrabalho no mesmo, é aconselhável a
+troca do chicote elétrico danificado. Emendas poderão alterar a impedância
+característica da rede e com isso afetar o seu funcionamento.<o:p></o:p></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><span lang="PT-BR" style="font-family:Arial"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><span lang="PT-BR" style="font-family:Arial">Estas foram algumas informações técnicas
+de um dos protocolos de comunicação mais utilizados atualmente em aplicações
+embarcadas.<o:p></o:p></span></p>
+
+<p class="MsoBodyText" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><span lang="PT-BR" style="font-family:Arial"><a href="http://www.alexag.com.br/CAN_Bus_Parte_3.html">Na próxima
+e última parte</a>, detalharemos o projeto do hardware e do software de uma ECU
+CAN. Além disso, montaremos juntos uma rede de comunicação de dados
+fundamentada neste fantástico protocolo.<o:p></o:p></span></p>
+
+<p class="MsoNormal" align="right" style="text-align:right"><span lang="PT-BR" style="mso-ansi-language:PT-BR"><!--[if !supportEmptyParas]-->&nbsp;<!--[endif]--><o:p></o:p></span></p>
+
+</div>
+
+
+
+
+</body><grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration></html>
