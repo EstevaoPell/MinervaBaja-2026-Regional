@@ -2,6 +2,21 @@
 
 Este repositório contém o código-fonte do sistema eletrônico embarcado do nosso veículo BAJA SAE. O projeto utiliza o microcontrolador **ESP32** devido ao seu poder de processamento dual-core e capacidade de comunicação sem fio nativa (ESP-NOW).
 
+## 📂 Estrutura de Pastas e Onde Encontrar o Código
+
+Este projeto foi desenvolvido utilizando a extensão **PlatformIO** no VS Code. Diferente da Arduino IDE tradicional, os códigos principais não estão em arquivos `.ino` na raiz, mas sim organizados em pastas estruturadas.
+
+Para visualizar ou editar os códigos, navegue até os seguintes diretórios:
+
+*   **Código da Central (A "Caixa Preta"):**
+    Navegue até a pasta `ESP1 projeto` > `src` > abra o arquivo `main.cpp`.
+*   **Código do Painel (Dashboard):**
+    Navegue até a pasta `ESP2 projeto` > `src` > abra o arquivo `main.cpp`.
+*   **Gerenciamento de Bibliotecas:**
+    As bibliotecas (como as do Display OLED, GPS, etc.) não precisam ser instaladas manualmente. Elas estão listadas nos arquivos `platformio.ini` na raiz de cada projeto e serão baixadas automaticamente pelo VS Code ao compilar.
+
+---
+
 ## 📌 Visão Geral do Projeto
 
 Para garantir a confiabilidade dos dados e a segurança elétrica do sistema, dividimos a arquitetura em duas unidades de processamento distintas: a **Central de Aquisição de Dados (DAQ)** e o **Painel do Piloto (Dashboard)**.
@@ -46,7 +61,7 @@ O sistema foi desenhado para integrar os seguintes sensores:
 
 Como ainda estamos aguardando a definição final dos modelos de alguns sensores, o código da **Central (ESP 1)** foi escrito de forma **modular**. 
 
-No arquivo principal, você encontrará funções separadas para cada grupo de leitura, como:
+No arquivo principal (`src/main.cpp`), você encontrará funções separadas para cada grupo de leitura, como:
 * `lerRPMeVelocidade()`
 * `lerBateriaCombustivel()`
 * `lerTemperaturas()`
@@ -54,8 +69,8 @@ No arquivo principal, você encontrará funções separadas para cada grupo de l
 
 **Regra para os Desenvolvedores da Equipe:**
 Atualmente, essas funções possuem "valores falsos" (dummy data) para fins de teste da comunicação de rádio e Datalogger. Assim que um sensor real for definido:
-1. Adicione a biblioteca correspondente no topo do arquivo.
-2. Configure os pinos no `setup()`.
+1. Adicione a biblioteca correspondente no `platformio.ini`.
+2. Faça o `#include` no topo do `main.cpp` e configure os pinos no `setup()`.
 3. Substitua o valor falso dentro da função específica pela leitura real do sensor.
 4. **Não altere** a lógica de envio (ESP-NOW) ou a estrutura de dados sem avisar o restante da equipe, pois isso quebrará a compatibilidade com o ESP 2 (Painel).
 
@@ -84,4 +99,4 @@ Para evitar queima de portas ou conflitos nos barramentos de comunicação, **si
   * `5`: CS (Chip Select do Cartão SD)
   * `13`: CS (Chip Select do Termopar)
 
-> **Atenção Hardware:** O ESP32 opera em **3.3V**. NUNCA conecte sinais de 5V ou 12V (direto do chicote do Baja) nos pinos digitais ou analógicos sem antes passar por um divisor de tensão ou optoacoplador.
+> **Atenção Hardware:** O ESP32 opera em **3.3V**. NUNCA conecte sinais de 5V ou 12V (direto do chicote do veículo) nos pinos digitais ou analógicos sem antes passar por um divisor de tensão ou optoacoplador.
