@@ -27,4 +27,4 @@ O sistema eletrônico é responsável por garantir a segurança, aquisição de 
 ## 🚀 Como Contribuir (Para Membros e Trainees)
 1. Faça o clone do repositório:
    ```bash
-   git clone [https://github.com/NatalNoUnturned/H2-eletronica.git](https://github.com/NatalNoUnturned/H2-eletronica.git)
+   git clone https://github.com/NatalNoUnturned/Minerva-Baja-Eletronica.git
