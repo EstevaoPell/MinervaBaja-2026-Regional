@@ -28,3 +28,10 @@ O sistema eletrônico é responsável por garantir a segurança, aquisição de 
 1. Faça o clone do repositório:
    ```bash
    git clone https://github.com/NatalNoUnturned/Minerva-Baja-Eletronica.git
+
+2. Para abrir a pasta pelo VScode mesmo use no terminal:
+   ```bash
+   cd Minerva-Baja-Eletronica
+   
+   ```bash
+   code .
