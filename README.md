@@ -14,14 +14,12 @@ O sistema eletrônico é responsável por garantir a segurança, aquisição de 
 - **Segurança:** Sistema de Kill Switch e luz de freio em conformidade com o Regulamento BAJA SAE 2025.
 
 ## 📂 Estrutura do Repositório
-- `/docs`: Regulamentos da SAE, manuais de telemetria, pinouts e relatórios técnicos.
-- `/firmware`: Códigos desenvolvidos (C/C++) para ESP32 DevKit V1, WROOM e LoRa V2.
-- `/hardware`: Esquemáticos elétricos e projetos de placas de circuito impresso (PCB) no EasyEDA.
-- `/mecanica_eletronica`: Modelagem 3D das cases de proteção para as PCBs e suporte para baterias 18650.
+- `/Arquivos antigos`: Nesta pasta contem todos os documentos antigos de membros antigos da equipe, informando sobre a maior parte (ou tudo) do nosso veiculo H2.
+- `/Veiculo pra competicao`: Aqui estarao os codigos do nosso ESP32 para o veiculo de competicao de 2026.
 
 ## 🛠️ Tecnologias e Ferramentas Utilizadas
-* **Hardware base:** ESP32, Arduino Nano, Arduino Pro Mini
-* **Software:** Arduino IDE, EasyEDA (Projeto de PCB), Software CAD 3D
+* **Hardware base:** ESP32 DEV KIT
+* **Software:** VSCode com PlatformIO, EasyEDA (Projeto de PCB), SolidWorks e EnderIO
 * **Protocolos:** I2C, SPI, UART, Sinais Analógicos e PWM
 
 ## 🚀 Como Contribuir (Para Membros e Trainees)
