@@ -1,6 +1,6 @@
-# ⚡ Eletrônica e Telemetria - H2 Challenge (Minerva Baja)
+# ⚡ Eletrônica e Telemetria - Minerva Baja
 
-Bem-vindo ao repositório oficial do subsistema de **Eletrônica e Telemetria** do veículo híbrido-elétrico a célula de combustível a hidrogênio (H2 Challenge) da equipe **Minerva Baja - UFRJ**.
+Bem-vindo ao repositório oficial do subsistema de **Eletrônica** da equipe **Minerva Baja - UFRJ**.
 
 Este repositório concentra todo o código-fonte (firmware), projetos de hardware (PCBs) e documentação técnica do nosso sistema embarcado.
 
