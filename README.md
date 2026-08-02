@@ -33,6 +33,6 @@ O sistema eletrônico é responsável por garantir a segurança, aquisição de 
    ```bash
    cd Minerva-Baja-Eletronica
    ```
-  Em seguida use:
+   Em seguida use:
    ```bash
    code .
