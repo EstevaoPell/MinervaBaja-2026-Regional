@@ -32,6 +32,7 @@ O sistema eletrônico é responsável por garantir a segurança, aquisição de 
 2. Para abrir a pasta pelo VScode mesmo use no terminal:
    ```bash
    cd Minerva-Baja-Eletronica
-   
-   ```bash
+
+    Em seguida use:
+    
    code .
