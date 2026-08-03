@@ -1,146 +1,69 @@
 #include <Arduino.h>
 #include <esp_now.h>
 #include <WiFi.h>
-// Futuramente, você fará os #includes aqui: <Wire.h>, <SPI.h>, <SD.h>, <TinyGPS++.h>, etc.
 
-// --- MAPEAMENTO DE PINOS ---
-#define PIN_BAT_ADC 34
-#define PIN_COMB_ADC 35
-#define PIN_RPM_RODA 4
-#define PIN_RPM_MOTOR 25
+// --- PINOS DOS SENSORES LOCAIS ---
+#define PIN_BAT_ADC 34       // Divisor de Tensão
+#define PIN_COMB_ADC 35      // Sensor Capacitivo
+#define PIN_FREIO_CEBOLINHA 4 // Cebolinhas 3-RHO
 
-// --- MAC DO PAINEL (Preencher depois) ---
-uint8_t mac_painel[] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
+uint8_t mac_painel[] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}; // MAC do ESP 2
 
 // --- ESTRUTURAS DE DADOS ---
 
-// 1. Dados completos para o Cartão SD (Caixa Preta)
+// O que recebo da Caixa Preta (ESP 3)
 typedef struct StructCaixaPreta {
-  float rpmMotor;
-  float velocidadeKmH;
-  float tensaoBateria;
-  int nivelCombustivel;
-  float tempMotorTermopar;
-  float tempCVTInfravermelho;
-  float gpsLatitude;
-  float gpsLongitude;
-  float acelerometroX;
-  float acelerometroY;
+  float velocidadeGPS;
+  float aceleracaoX;
+  float aceleracaoY;
 } StructCaixaPreta;
 
-// 2. Dados filtrados para o Volante (Painel)
+// O que envio para o Painel (ESP 2)
 typedef struct StructPainel {
-  float velocidadeKmH;
+  float velocidade;
   float tensaoBateria;
   int nivelCombustivel;
-  bool alertaTempAlta; 
+  bool freioAcionado;
 } StructPainel;
 
-StructCaixaPreta dadosCompletos;
-StructPainel pacoteEnvio;
+StructCaixaPreta dadosRecebidosCaixaPreta;
+StructPainel pacoteParaPainel;
 esp_now_peer_info_t peerInfo;
 
-// --- VARIÁVEIS DE INTERRUPÇÃO (RPM) ---
-volatile unsigned long pulsosRoda = 0;
-volatile unsigned long pulsosMotor = 0;
-unsigned long tempoAnterior = 0;
-const unsigned long INTERVALO_LEITURA = 100; // Lê e envia a cada 100ms (10Hz)
-
-// --- FUNÇÕES DE INTERRUPÇÃO ---
-void IRAM_ATTR contaPulsoRoda() { pulsosRoda++; }
-void IRAM_ATTR contaPulsoMotor() { pulsosMotor++; }
-
-// --- MÓDULOS DE LEITURA (PREPARE AQUI PARA O FUTURO) ---
-
-void lerRPMeVelocidade() {
-  noInterrupts();
-  unsigned long pulsosR = pulsosRoda;
-  unsigned long pulsosM = pulsosMotor;
-  pulsosRoda = 0;
-  pulsosMotor = 0;
-  interrupts();
-
-  // Quando tiver a geometria do carro, coloque a matemática real aqui
-  dadosCompletos.rpmMotor = pulsosM * 10.0; // Falso para teste
-  dadosCompletos.velocidadeKmH = pulsosR * 2.5; // Falso para teste
+// Callback: Quando a Caixa Preta manda dados
+void OnDataRecv(const uint8_t * mac, const uint8_t *incomingData, int len) {
+  memcpy(&dadosRecebidosCaixaPreta, incomingData, sizeof(dadosRecebidosCaixaPreta));
 }
 
-void lerBateriaCombustivel() {
-  // Bateria
-  int adcBat = analogRead(PIN_BAT_ADC);
-  dadosCompletos.tensaoBateria = (adcBat * 3.3 / 4095.0) * 5.0; // Multiplicador de teste
-
-  // Combustível
-  int adcComb = analogRead(PIN_COMB_ADC);
-  dadosCompletos.nivelCombustivel = map(adcComb, 0, 4095, 0, 100);
-}
-
-void lerTemperaturas() {
-  // No futuro, chamará as bibliotecas do SPI (Termopar) e I2C (Infravermelho)
-  dadosCompletos.tempMotorTermopar = 90.0; // Falso
-  dadosCompletos.tempCVTInfravermelho = 60.0; // Falso
-}
-
-void lerGPSeAcelerometro() {
-  // No futuro, fará a leitura da Serial2 e do I2C
-  dadosCompletos.gpsLatitude = -22.0; // Falso
-  dadosCompletos.acelerometroX = 1.2; // Falso
-}
-
-void salvarNoSD() {
-  // Futura rotina para pegar tudo que está em 'dadosCompletos' 
-  // e gravar em formato CSV no cartão SD.
-}
-
-// --- SETUP ---
 void setup() {
   Serial.begin(115200);
-
-  // Configuração Pinos Básicos
-  pinMode(PIN_RPM_RODA, INPUT_PULLUP);
-  pinMode(PIN_RPM_MOTOR, INPUT_PULLUP);
-  attachInterrupt(digitalPinToInterrupt(PIN_RPM_RODA), contaPulsoRoda, RISING);
-  attachInterrupt(digitalPinToInterrupt(PIN_RPM_MOTOR), contaPulsoMotor, RISING);
+  pinMode(PIN_FREIO_CEBOLINHA, INPUT_PULLUP);
   analogReadResolution(12);
 
-  // Inicializa Wi-Fi e ESP-NOW
   WiFi.mode(WIFI_STA);
-  if (esp_now_init() != ESP_OK) {
-    Serial.println("Erro no ESP-NOW");
-    return;
-  }
+  esp_now_init();
+  esp_now_register_recv_cb(OnDataRecv); // Escuta a Caixa Preta
   
-  // Registra o Painel
-  memcpy(peerInfo.peer_addr, mac_painel, 6);
+  memcpy(peerInfo.peer_addr, mac_painel, 6); // Registra o Painel
   peerInfo.channel = 0;  
   peerInfo.encrypt = false;
   esp_now_add_peer(&peerInfo);
 }
 
-// --- LOOP PRINCIPAL ---
 void loop() {
-  unsigned long tempoAtual = millis();
+  // 1. Lê a Bateria (Divisor de Tensão com R1=47k, R2=10k)
+  int adcBat = analogRead(PIN_BAT_ADC);
+  float voltagemNoPino = (adcBat * 3.3) / 4095.0; 
+  pacoteParaPainel.tensaoBateria = voltagemNoPino * ((47000.0 + 10000.0) / 10000.0);
 
-  if (tempoAtual - tempoAnterior >= INTERVALO_LEITURA) {
-    
-    // 1. Atualiza todos os dados brutos nos submódulos
-    lerRPMeVelocidade();
-    lerBateriaCombustivel();
-    lerTemperaturas();
-    lerGPSeAcelerometro();
+  // 2. Lê a Cebolinha de Freio
+  pacoteParaPainel.freioAcionado = (digitalRead(PIN_FREIO_CEBOLINHA) == LOW);
 
-    // 2. Salva a "Caixa Preta" no Cartão SD
-    salvarNoSD();
+  // 3. Pega a velocidade que veio da Caixa Preta
+  pacoteParaPainel.velocidade = dadosRecebidosCaixaPreta.velocidadeGPS;
 
-    // 3. Prepara o pacote mastigado para o Volante
-    pacoteEnvio.velocidadeKmH = dadosCompletos.velocidadeKmH;
-    pacoteEnvio.tensaoBateria = dadosCompletos.tensaoBateria;
-    pacoteEnvio.nivelCombustivel = dadosCompletos.nivelCombustivel;
-    pacoteEnvio.alertaTempAlta = (dadosCompletos.tempMotorTermopar > 110.0);
+  // 4. Manda o pacote final para o Painel
+  esp_now_send(mac_painel, (uint8_t *) &pacoteParaPainel, sizeof(pacoteParaPainel));
 
-    // 4. Dispara via Rádio
-    esp_now_send(mac_painel, (uint8_t *) &pacoteEnvio, sizeof(pacoteEnvio));
-
-    tempoAnterior = tempoAtual;
-  }
+  delay(200); // Roda a 5Hz
 }

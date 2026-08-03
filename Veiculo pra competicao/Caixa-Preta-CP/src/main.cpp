@@ -1,38 +1,69 @@
 #include <Arduino.h>
-#include <Wire.h> // Biblioteca para comunicação I2C (MPU e RM3100)
-#include <HardwareSerial.h> // Para ler o GPS no UART
+#include <Wire.h>
+#include <HardwareSerial.h>
+#include <TinyGPS++.h>
+#include <Adafruit_MPU6050.h>
+#include <Adafruit_Sensor.h>
+#include <esp_now.h>
+#include <WiFi.h>
 
-// Pinos I2C padrão do ESP32 para o MPU6050 e RM3100
-#define I2C_SDA 21
-#define I2C_SCL 22
-
-// Pinos do GPS (Ajuste conforme a solda na PCB de vocês)
+// --- PINOS ---
 #define RX_GPS 16
 #define TX_GPS 17
-HardwareSerial gpsSerial(2); // Usa a porta Serial 2 do ESP32
+
+// --- MÓDULOS ---
+HardwareSerial gpsSerial(2);
+TinyGPSPlus gps;
+Adafruit_MPU6050 mpu;
+
+// --- DADOS PARA O ESP 1 (Central) ---
+uint8_t mac_esp1[] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}; // Colocar o MAC do ESP 1 aqui
+
+typedef struct StructCaixaPreta {
+  float velocidadeGPS;
+  float aceleracaoX;
+  float aceleracaoY;
+} StructCaixaPreta;
+
+StructCaixaPreta dadosDinâmicos;
+esp_now_peer_info_t peerInfo;
 
 void setup() {
-  Serial.begin(115200); // Monitor Serial do PC
-  
-  // 1. Inicializa o barramento I2C para falar com a plaquinha azul (MPU6050) e a preta (RM3100)
-  Wire.begin(I2C_SDA, I2C_SCL);
-  Serial.println("Barramento I2C Iniciado.");
-  
-  // 2. Inicializa a comunicação com o GPS
+  Serial.begin(115200);
   gpsSerial.begin(9600, SERIAL_8N1, RX_GPS, TX_GPS);
-  Serial.println("GPS Iniciado.");
-  
-  // (Aqui no futuro entra a inicialização do MPU6050, RM3100 e LoRa)
+
+  // Inicializa I2C (MPU6050 e RM3100)
+  Wire.begin(21, 22);
+  if (!mpu.begin()) {
+    Serial.println("Falha ao iniciar MPU6050");
+  }
+
+  // Inicializa ESP-NOW para mandar pro ESP 1
+  WiFi.mode(WIFI_STA);
+  esp_now_init();
+  memcpy(peerInfo.peer_addr, mac_esp1, 6);
+  peerInfo.channel = 0;  
+  peerInfo.encrypt = false;
+  esp_now_add_peer(&peerInfo);
 }
 
 void loop() {
-  // Apenas lê o que o GPS está mandando e joga na tela do PC para testar a solda
+  // 1. Lê o GPS
   while (gpsSerial.available() > 0) {
-    char c = gpsSerial.read();
-    Serial.print(c);
+    gps.encode(gpsSerial.read());
   }
+  if (gps.speed.isUpdated()) {
+    dadosDinâmicos.velocidadeGPS = gps.speed.kmph();
+  }
+
+  // 2. Lê o MPU6050 (Acelerômetro)
+  sensors_event_t a, g, temp;
+  mpu.getEvent(&a, &g, &temp);
+  dadosDinâmicos.aceleracaoX = a.acceleration.x;
+  dadosDinâmicos.aceleracaoY = a.acceleration.y;
+
+  // 3. Envia para o ESP 1 (Central)
+  esp_now_send(mac_esp1, (uint8_t *) &dadosDinâmicos, sizeof(dadosDinâmicos));
   
-  // O código real dessa caixa vai ler o I2C (Aceleração, Giro, Magnetismo) 
-  // e o GPS (Velocidade, Latitude) numa frequência altíssima (ex: 50 vezes por segundo)
-  // e então repassar isso via Módulo LoRa para uma antena montada na tenda da Minerva.
+  delay(100); // Roda a 10Hz
 }
