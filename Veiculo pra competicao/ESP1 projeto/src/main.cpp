@@ -11,19 +11,22 @@ uint8_t mac_painel[] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}; // MAC do ESP 2
 
 // --- ESTRUTURAS DE DADOS ---
 
-// O que recebo da Caixa Preta (ESP 3)
+// Essa struct vai no código do ESP 3 e do ESP 1
 typedef struct StructCaixaPreta {
   float velocidadeGPS;
+  float posicaoLatitude;
+  float posicaoLongitude;
   float aceleracaoX;
   float aceleracaoY;
 } StructCaixaPreta;
 
-// O que envio para o Painel (ESP 2)
+// Essa struct vai no código do ESP 1 e do ESP 2
 typedef struct StructPainel {
-  float velocidade;
-  float tensaoBateria;
-  int nivelCombustivel;
-  bool freioAcionado;
+  float velocidade;          // O ESP 1 escolhe se manda a do GPS ou a da Roda
+  float rpmMotor;            // Lido pelo ESP 1
+  float tensaoBateria;       // Lido pelo ESP 1
+  int nivelCombustivel;      // Lido pelo ESP 1
+  float temperaturaCVT;      // Lido pelo ESP 1
 } StructPainel;
 
 StructCaixaPreta dadosRecebidosCaixaPreta;

@@ -19,8 +19,11 @@ Adafruit_MPU6050 mpu;
 // --- DADOS PARA O ESP 1 (Central) ---
 uint8_t mac_esp1[] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}; // Colocar o MAC do ESP 1 aqui
 
+// Essa struct vai no código do ESP 3 e do ESP 1
 typedef struct StructCaixaPreta {
   float velocidadeGPS;
+  float posicaoLatitude;
+  float posicaoLongitude;
   float aceleracaoX;
   float aceleracaoY;
 } StructCaixaPreta;

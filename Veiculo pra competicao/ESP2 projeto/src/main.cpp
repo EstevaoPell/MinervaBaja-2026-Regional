@@ -9,12 +9,13 @@
 #define SCREEN_HEIGHT 64
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1);
 
-// Tem que ser IDÊNTICA à estrutura enviada pelo ESP 1
+// Essa struct vai no código do ESP 1 e do ESP 2
 typedef struct StructPainel {
-  float velocidade;
-  float tensaoBateria;
-  int nivelCombustivel;
-  bool freioAcionado;
+  float velocidade;          // O ESP 1 escolhe se manda a do GPS ou a da Roda
+  float rpmMotor;            // Lido pelo ESP 1
+  float tensaoBateria;       // Lido pelo ESP 1
+  int nivelCombustivel;      // Lido pelo ESP 1
+  float temperaturaCVT;      // Lido pelo ESP 1
 } StructPainel;
 
 StructPainel dadosRecebidos;
