@@ -1,102 +1,60 @@
 # Sistema de Telemetria e Aquisição de Dados - Minerva BAJA SAE 🏁
 
-Este repositório contém o código-fonte do sistema eletrônico embarcado do nosso veículo BAJA SAE. O projeto utiliza o microcontrolador **ESP32** devido ao seu poder de processamento dual-core e capacidade de comunicação sem fio nativa (ESP-NOW).
-
-## 📂 Estrutura de Pastas e Onde Encontrar o Código
-
-Este projeto foi desenvolvido utilizando a extensão **PlatformIO** no VS Code. Diferente da Arduino IDE tradicional, os códigos principais não estão em arquivos `.ino` na raiz, mas sim organizados em pastas estruturadas.
-
-Para visualizar ou editar os códigos, navegue até os seguintes diretórios:
-
-*   **Código da Central (A "Caixa Preta"):**
-    Navegue até a pasta `ESP1 projeto` > `src` > abra o arquivo `main.cpp`.
-*   **Código do Painel (Dashboard):**
-    Navegue até a pasta `ESP2 projeto` > `src` > abra o arquivo `main.cpp`.
-*   **Gerenciamento de Bibliotecas:**
-    As bibliotecas (como as do Display OLED, GPS, etc.) não precisam ser instaladas manualmente. Elas estão listadas nos arquivos `platformio.ini` na raiz de cada projeto e serão baixadas automaticamente pelo VS Code ao compilar.
+Este repositório contém o código-fonte do sistema eletrônico embarcado do veículo BAJA SAE da Minerva. O projeto utiliza microcontroladores **ESP32** devido ao seu alto poder de processamento e capacidades de comunicação sem fio (ESP-NOW e LoRa).
 
 ---
 
-## 📌 Visão Geral do Projeto
+## 📂 Estrutura de Pastas e Organização do Projeto
 
-Para garantir a confiabilidade dos dados e a segurança elétrica do sistema, dividimos a arquitetura em duas unidades de processamento distintas: a **Central de Aquisição de Dados (DAQ)** e o **Painel do Piloto (Dashboard)**.
+Este repositório foi desenvolvido utilizando o **PlatformIO** no VS Code. O sistema está dividido em três projetos independentes, cada um correspondente a um microcontrolador da arquitetura:
 
-Elas se comunicam **sem fio** através do protocolo **ESP-NOW**, que funciona de forma direta (ponto a ponto), sem necessidade de roteador Wi-Fi, garantindo baixíssima latência e imunidade a ruídos elétricos do motor.
-
----
-
-## 🏗️ A Arquitetura (DAQ + Dashboard)
-
-### 1. ESP 1: Central DAQ (A "Caixa Preta")
-Fica localizada na parte traseira/protegida do carro. É responsável pelo trabalho pesado.
-* **Função:** Ler todos os sensores físicos do carro.
-* **Datalogger (Cartão SD):** Funciona como uma caixa preta. Salva absolutamente todos os dados lidos (em alta frequência) em um arquivo `.csv` no cartão MicroSD. Esses dados serão usados pela equipe de engenharia nos boxes para análise de desempenho (dinâmica, CVT, freios).
-* **Transmissão:** Filtra os dados críticos e monta um pacote leve ("mastigado") contendo apenas o que o piloto precisa saber, enviando-o via rádio para o painel.
-
-### 2. ESP 2: Painel do Piloto (Dashboard)
-Fica no volante do veículo. Completamente isolado dos ruídos de 12V e da fiação pesada do motor.
-* **Função:** Receber o pacote de dados filtrado da Central via ESP-NOW.
-* **Exibição:** Atualizar a tela (Display OLED/TFT) em tempo real, informando ao piloto apenas o essencial, além de emitir alertas visuais (ex: Temperatura Alta).
+1. **Caixa Preta (ESP 3):**
+   * Caminho: `Caixa_Preta_ESP3/src/main.cpp`
+   * Função: Módulo dinâmico independente.
+2. **Central DAQ (ESP 1):**
+   * Caminho: `ESP1 projeto/src/main.cpp`
+   * Função: Cérebro integrador e central de processamento do chassi.
+3. **Painel do Piloto (ESP 2):**
+   * Caminho: `ESP2 projeto/src/main.cpp`
+   * Função: Dashboard no volante com display OLED.
 
 ---
 
-## 🔌 Sensores e Variáveis Monitoradas
+## 🏗️ A Nova Arquitetura de 3 ESPs (Fluxo de Dados)
 
-O sistema foi desenhado para integrar os seguintes sensores:
+Para garantir máxima eficiência, modularidade e confiabilidade, o sistema opera em cascata:
 
-| Grandeza | Sensor Utilizado | Protocolo / Pino |
-| :--- | :--- | :--- |
-| **Velocidade & RPM da Roda** | Sensor Magnético / Indutivo | Pulso Digital (Interrupção) |
-| **RPM do Motor** | Sensor Magnético / Indutivo | Pulso Digital (Interrupção) |
-| **Nível de Combustível** | Sensor Capacitivo | Sinal Analógico (ADC) |
-| **Tensão da Bateria** | Divisor de Tensão (Resistores) | Sinal Analógico (ADC) |
-| **Temperatura do Motor** | Termopar (Módulo SPI) | SPI |
-| **Temperatura da CVT** | Infravermelho (A Implementar) | I2C |
-| **Dinâmica do Chassi** | Acelerômetro | I2C |
-| **Posicionamento** | Módulo GPS | Serial (UART2) |
+### 1. ESP 3: A Caixa Preta (Módulo Dinâmico)
+Fica encarregada de medir a dinâmica do veículo de forma autônoma.
+* **Sensores:** Módulo GPS (posicionamento e velocidade via satélite) e MPU6050 (Acelerômetro e Giroscópio).
+* **Comunicação:** Possui um rádio **LoRa** para transmitir os dados de dinâmica em longo alcance diretamente para os boxes (engenharia), além de repassar os dados de velocidade para o ESP 1.
 
----
+### 2. ESP 1: A Central DAQ (O Cérebro do Chassi)
+Fica localizada na parte traseira/protegida do carro e centraliza todas as informações do veículo.
+* **Entradas Locais (Sensores Físicos):**
+  * Tensão da Bateria do carro (via circuito divisor de tensão).
+  * Nível de Combustível (Sensor Capacitivo).
+  * Rotação do Motor (Sensor Indutivo/Magnético com interrupção).
+  * Rotação da Roda / Freio (Sensor Indutivo/Magnético com interrupção).
+  * Temperatura da CVT.
+* **Integração:** Recebe os dados dinâmicos da Caixa Preta (ESP 3), junta com as leituras locais, empacota tudo e transmite o pacote filtrado para o volante via **ESP-NOW**.
 
-## 🛠️ Como o Código Está Estruturado (Modularidade)
-
-Como ainda estamos aguardando a definição final dos modelos de alguns sensores, o código da **Central (ESP 1)** foi escrito de forma **modular**. 
-
-No arquivo principal (`src/main.cpp`), você encontrará funções separadas para cada grupo de leitura, como:
-* `lerRPMeVelocidade()`
-* `lerBateriaCombustivel()`
-* `lerTemperaturas()`
-* `lerGPSeAcelerometro()`
-
-**Regra para os Desenvolvedores da Equipe:**
-Atualmente, essas funções possuem "valores falsos" (dummy data) para fins de teste da comunicação de rádio e Datalogger. Assim que um sensor real for definido:
-1. Adicione a biblioteca correspondente no `platformio.ini`.
-2. Faça o `#include` no topo do `main.cpp` e configure os pinos no `setup()`.
-3. Substitua o valor falso dentro da função específica pela leitura real do sensor.
-4. **Não altere** a lógica de envio (ESP-NOW) ou a estrutura de dados sem avisar o restante da equipe, pois isso quebrará a compatibilidade com o ESP 2 (Painel).
+### 3. ESP 2: O Painel do Piloto (Dashboard)
+Fica fixado no volante, isolado dos ruídos elétricos do motor.
+* **Função:** Recebe o pacote de dados processado da Central (ESP 1) via ESP-NOW.
+* **Exibição:** Atualiza dinamicamente o display OLED em tempo real com as informações vitais para o piloto (velocidade, bateria, combustível, temperatura).
 
 ---
 
-## 📍 Pinagem Oficial (ESP 1 - Central)
+## 📍 Pinagem Oficial (ESP 1 - Central DAQ)
 
-Para evitar queima de portas ou conflitos nos barramentos de comunicação, **siga estritamente** este mapa de pinos ao conectar os sensores na placa:
+Para evitar danos por sobretensão e conflitos de barramento, siga estritamente este mapa de pinos na Central:
 
-* **Sinais Analógicos (Seguros, apenas leitura):**
-  * `34`: Tensão da Bateria
-  * `35`: Nível de Combustível
-* **Interrupções (Pulsos de RPM):**
-  * `4`: RPM da Roda (Requer Optoacoplador para 12V)
-  * `25`: RPM do Motor (Requer Optoacoplador para 12V)
-* **Barramento I2C (Acelerômetro e Temp. IR):**
-  * `21`: SDA (Dados)
-  * `22`: SCL (Clock)
-* **Barramento Serial/UART2 (GPS):**
-  * `16`: RX2 (Conectar ao TX do módulo GPS)
-  * `17`: TX2 (Conectar ao RX do módulo GPS)
-* **Barramento SPI (Cartão SD e Termopar):**
-  * `18`: SCK (Clock compartilhado)
-  * `19`: MISO (Dados In compartilhado)
-  * `23`: MOSI (Dados Out compartilhado)
-  * `5`: CS (Chip Select do Cartão SD)
-  * `13`: CS (Chip Select do Termopar)
+* **Sinais Analógicos (Entradas Seguras / ADC):**
+  * `PIN_BAT_ADC (34)`: Tensão da Bateria (Sinal do divisor de tensão)
+  * `PIN_COMB_ADC (35)`: Nível de Combustível (Sensor Capacitivo)
+* **Interrupções Digitais (Pulsos de Giro):**
+  * `PIN_RPM_RODA (4)`: Sensor Indutivo da Roda (Requer Optoacoplador)
+  * `PIN_RPM_MOTOR (25)`: Sensor Indutivo do Motor (Requer Optoacoplador)
 
-> **Atenção Hardware:** O ESP32 opera em **3.3V**. NUNCA conecte sinais de 5V ou 12V (direto do chicote do veículo) nos pinos digitais ou analógicos sem antes passar por um divisor de tensão ou optoacoplador.
+> **⚠️ Alerta de Hardware:** O ESP32 opera estritamente em **3.3V**. Jamais conecte sinais de 12V diretamente aos pinos digitais ou analógicos sem utilizar divisores de tensão ou optoacopladores adequados.
