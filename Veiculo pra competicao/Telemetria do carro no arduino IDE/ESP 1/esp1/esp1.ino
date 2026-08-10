@@ -3,7 +3,6 @@
 // Função: Gerenciar leituras locais, agrupar dados do chassi e transmitir ao painel.
 // ==============================================================================
 
-#include <Arduino.h>
 #include <esp_now.h>
 #include <WiFi.h>
 
