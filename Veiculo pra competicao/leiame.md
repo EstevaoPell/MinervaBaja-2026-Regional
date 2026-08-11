@@ -4,7 +4,7 @@ Este repositório contém o código-fonte do sistema eletrônico embarcado do ve
 
 ---
 
-## 📂 Estrutura de Pastas e Organização do Projeto:
+## 📂 Estrutura de Pastas e Organização do Projeto
 
 Este repositório foi desenvolvido utilizando o **PlatformIO** no VS Code. O sistema está dividido em três projetos independentes, cada um correspondente a um microcontrolador da arquitetura:
 
